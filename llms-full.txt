@@ -689,28 +689,29 @@ Technical reference for AI assistants modifying this package.
 ## File Locations
 
 ```
-packages/ui/
-├── src/
-│   ├── components/
-│   │   ├── ui/                    # Base UI components
-│   │   │   ├── button.tsx
-│   │   │   └── stories/           # Storybook stories
-│   │   │       └── button.stories.tsx
-│   │   └── neynar/                # Neynar-specific components
-│   │       ├── typography/
-│   │       ├── color-mode/
-│   │       └── first-light/
-│   ├── hooks/                     # Custom hooks
-│   ├── lib/                       # Utilities (cn, variants)
-│   └── styles/                    # CSS and themes
-│       └── themes/
-├── .llm/                          # LLM documentation
-│   ├── components/                # Per-component docs
-│   ├── index.llm.md              # Package overview
-│   ├── hooks.llm.md
-│   ├── utilities.llm.md
-│   └── theming.llm.md
-└── package.json                   # Exports map (auto-generated)
+src/
+├── components/
+│   ├── ui/                    # Base UI components
+│   │   ├── button.tsx
+│   │   └── stories/           # Storybook stories
+│   │       └── button.stories.tsx
+│   └── neynar/                # Neynar-specific components
+│       ├── typography/
+│       ├── color-mode/
+│       └── first-light/
+├── hooks/                     # Custom hooks
+├── lib/                       # Utilities (cn, variants)
+└── styles/                    # CSS and themes
+    └── themes/
+
+.llm/                          # LLM documentation
+├── components/                # Per-component docs
+├── index.llm.md              # Package overview
+├── hooks.llm.md
+├── utilities.llm.md
+└── theming.llm.md
+
+package.json                   # Exports map (auto-generated)
 ```
 
 ## Component Template

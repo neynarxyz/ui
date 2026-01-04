@@ -6,29 +6,34 @@ import { Markdown } from "@storybook/addon-docs/blocks";
  */
 const DOCS_TO_STORY_PATH: Record<string, string> = {
   // Theming docs (in theming/ folder)
+  "theming/index.md": "?path=/docs/theming-overview--docs",
   "./theming/index.md": "?path=/docs/theming-overview--docs",
   "../theming/index.md": "?path=/docs/theming-overview--docs",
 
   // Theme-specific docs
+  "theming/purple-dawn.md": "?path=/docs/theming-purple-dawn-theme--docs",
   "./theming/purple-dawn.md": "?path=/docs/theming-purple-dawn-theme--docs",
   "../theming/purple-dawn.md": "?path=/docs/theming-purple-dawn-theme--docs",
+  "theming/first-light.md": "?path=/docs/theming-first-light-theme--docs",
   "./theming/first-light.md": "?path=/docs/theming-first-light-theme--docs",
   "../theming/first-light.md": "?path=/docs/theming-first-light-theme--docs",
 
   // Color mode docs
+  "theming/color-mode-initializer.md": "?path=/docs/theming-components-colormodeinitializer--docs",
   "./theming/color-mode-initializer.md": "?path=/docs/theming-components-colormodeinitializer--docs",
   "../theming/color-mode-initializer.md": "?path=/docs/theming-components-colormodeinitializer--docs",
+  "theming/use-color-mode.md": "?path=/docs/theming-components-usecolormode--docs",
   "./theming/use-color-mode.md": "?path=/docs/theming-components-usecolormode--docs",
   "../theming/use-color-mode.md": "?path=/docs/theming-components-usecolormode--docs",
 
   // Getting started docs
   "components.md": "?path=/docs/getting-started-component-reference--docs",
-  "../components.md": "?path=/docs/getting-started-component-reference--docs",
   "./components.md": "?path=/docs/getting-started-component-reference--docs",
+  "../components.md": "?path=/docs/getting-started-component-reference--docs",
 
   "troubleshooting.md": "?path=/docs/getting-started-troubleshooting--docs",
-  "../troubleshooting.md": "?path=/docs/getting-started-troubleshooting--docs",
   "./troubleshooting.md": "?path=/docs/getting-started-troubleshooting--docs",
+  "../troubleshooting.md": "?path=/docs/getting-started-troubleshooting--docs",
 
   // Integration docs
   "integrations/nextjs.md": "?path=/docs/getting-started-next-js-integration--docs",
