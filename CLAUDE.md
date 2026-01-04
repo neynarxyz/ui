@@ -27,7 +27,8 @@ yarn build-storybook  # Build static Storybook site
 # Quality checks
 yarn type-check       # TypeScript type checking
 yarn lint             # ESLint (use --fix for auto-fixes)
-yarn lint --format json  # If stylish formatter has issues
+yarn format           # Format code with Prettier
+yarn format:check     # Check formatting (CI)
 ```
 
 ## Architecture
@@ -89,18 +90,19 @@ const buttonVariants = cva(
   }
 );
 
-export interface ButtonProps
-  extends ComponentProps<"button">,
-    VariantProps<typeof buttonVariants> {}
+type ButtonProps = ComponentProps<"button"> & VariantProps<typeof buttonVariants>;
 
-export function Button({ className, variant, size, ...props }: ButtonProps) {
+function Button({ className, variant, size, ...props }: ButtonProps) {
   return (
     <button
+      data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
     />
   );
 }
+
+export { Button, buttonVariants, type ButtonProps };
 ```
 
 ### Exports System
@@ -173,7 +175,7 @@ export const Button = () => {}
 ### Component Props
 - Extend from `ComponentProps<"element">` for native element props
 - Use `VariantProps<typeof variants>` for CVA variants
-- Prefer `interface` over `type` for props
+- Use `type` for component props (e.g., `type ButtonProps = ...`)
 
 ## Important Patterns
 
@@ -280,6 +282,31 @@ Storybook includes toolbar buttons for:
 - **Prefer editing over creating** - Don't create new files unless necessary
 - **No default exports** - Always use named exports
 - Build order: The library must be built before consuming apps can use it
+
+## Claude Code Integration
+
+### Slash Commands
+
+| Command | Description |
+|---------|-------------|
+| `/manage-component` | Document or scaffold components (TSDoc + .llm.md files) |
+| `/test-storybook` | Test components in Storybook via Playwright |
+
+### Agents
+
+| Agent | Description |
+|-------|-------------|
+| `component-manager` | Handles component documentation, scaffolding, and index management |
+
+### LLM Documentation
+
+Component documentation lives in `.llm/`:
+- `.llm/components/` - Per-component docs
+- `.llm/index.llm.md` - Component index
+- `.llm/hooks.llm.md` - Hooks documentation
+- `.llm/utilities.llm.md` - Utilities documentation
+- `.llm/theming.llm.md` - Theming guide
+- `llms.txt` - Entry point for LLM docs
 
 ## Peer Dependencies
 

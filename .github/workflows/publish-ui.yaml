@@ -30,10 +30,8 @@ jobs:
 
       - name: Build package
         run: yarn build
-        working-directory: ui
 
       - name: Publish to npm
         run: npm publish --access public
-        working-directory: ui
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -215,6 +215,10 @@ Framework-specific setup guides:
 
 - [Component Reference](./docs/components.md) — Complete component catalog
 - [Theming Guide](./docs/theming/index.md) — Themes, color mode, CSS variables
+  - [ColorModeInitializer](./docs/theming/color-mode-initializer.md) — SSR-safe color mode setup
+  - [useColorMode Hook](./docs/theming/use-color-mode.md) — Programmatic control
+  - [Purple Dawn Theme](./docs/theming/purple-dawn.md) — Default theme reference
+  - [First Light Theme](./docs/theming/first-light.md) — Hand-drawn aesthetic
 - [Troubleshooting](./docs/troubleshooting.md) — Common issues and solutions
 
 ### For AI Assistants
@@ -232,7 +236,7 @@ LLM-optimized documentation for AI coding assistants:
 
 **🚀 The Farcaster Platform**
 
-[Neynar](https://neynar.com) powers the best apps in the Farcaster ecosystem. We provide the infrastructure, APIs, and tools so you can build without managing your own nodes.
+[Neynar](https://neynar.com) powers the best apps in the Farcaster ecosystem. We provide the infrastructure, APIs, and tools so you can build without managing your own nodes. See [About Neynar](./docs/about-neynar.md) for more details.
 
 | Category | Description |
 |----------|-------------|
