@@ -1,0 +1,341 @@
+/* First Light Theme
+ *
+ * Hand-drawn wireframe aesthetic with wobbly SVG filters,
+ * offset shadows, and the Architects Daughter handwriting font.
+ *
+ * Usage:
+ *   @import "@neynar/ui/styles";
+ *   @import "@neynar/ui/themes/first-light";
+ *
+ *   // Add FirstLightFilters component once in your layout
+ *   import { FirstLightFilters } from "@neynar/ui/first-light";
+ *   <FirstLightFilters />
+ *
+ * For Storybook/runtime switching, add .theme-first-light class to <html>
+ */
+
+@import "@fontsource/architects-daughter/400.css";
+
+/* ============================================
+   FIRST LIGHT THEME - Variables
+   ============================================ */
+
+:root,
+html.theme-first-light {
+  --font-family: "Architects Daughter", cursive;
+  --radius: 0;
+  --surface-blur: 4px;
+
+  /* Paper and ink colors */
+  --background: #fafaf8;
+  --foreground: #1a1a1a;
+
+  /* Cards & Popovers - subtle transparency */
+  --card: oklch(1 0 0 / 90%);
+  --card-foreground: #1a1a1a;
+  --popover: oklch(1 0 0 / 90%);
+  --popover-foreground: #1a1a1a;
+
+  /* Strong black borders for hand-drawn look */
+  --border: rgba(0, 0, 0, 0.7);
+  --input: rgba(0, 0, 0, 0.1);
+  --ring: rgba(0, 0, 0, 0.5);
+
+  /* Primary - pencil/ink */
+  --primary: #1a1a1a;
+  --primary-foreground: #ffffff;
+
+  /* Secondary - light paper */
+  --secondary: #f5f5f0;
+  --secondary-foreground: #1a1a1a;
+
+  /* Muted - faded ink */
+  --muted: #f0f0eb;
+  --muted-foreground: #666666;
+  --subtle-foreground: #888888;
+
+  /* Accent - highlighter yellow */
+  --accent: #fff3b0;
+  --accent-foreground: #1a1a1a;
+
+  /* Semantic colors - marker style */
+  --destructive: #e53935;
+  --success: #43a047;
+  --warning: #fb8c00;
+  --info: #1e88e5;
+
+  /* Charts - grayscale */
+  --chart-1: #1a1a1a;
+  --chart-2: #666666;
+  --chart-3: #999999;
+  --chart-4: #cccccc;
+  --chart-5: #e0e0e0;
+
+  /* Sidebar */
+  --sidebar: #f5f5f0;
+  --sidebar-foreground: #1a1a1a;
+  --sidebar-primary: #1a1a1a;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #fff3b0;
+  --sidebar-accent-foreground: #1a1a1a;
+  --sidebar-border: rgba(0, 0, 0, 0.5);
+  --sidebar-ring: rgba(0, 0, 0, 0.3);
+
+  /* First Light-specific shadows */
+  --first-light-shadow: 3px 3px 0px rgba(0, 0, 0, 0.15);
+  --first-light-shadow-hover: 2px 2px 0px rgba(0, 0, 0, 0.15);
+  --first-light-shadow-active: 0px 0px 0px rgba(0, 0, 0, 0.15);
+}
+
+/* Dark mode - Chalkboard */
+.dark,
+html.theme-first-light.dark {
+  --background: #1e2a1e;
+  --foreground: #e8e8e8;
+
+  --card: oklch(0.22 0.02 140 / 90%);
+  --card-foreground: #e8e8e8;
+  --popover: oklch(0.22 0.02 140 / 90%);
+  --popover-foreground: #e8e8e8;
+
+  --border: rgba(255, 255, 255, 0.6);
+  --input: rgba(255, 255, 255, 0.1);
+  --ring: rgba(255, 255, 255, 0.4);
+
+  --primary: #e8e8e8;
+  --primary-foreground: #1e2a1e;
+
+  --secondary: #3a4a3a;
+  --secondary-foreground: #e8e8e8;
+
+  --muted: #3a4a3a;
+  --muted-foreground: #a0a0a0;
+  --subtle-foreground: #808080;
+
+  --accent: #e8d44d;
+  --accent-foreground: #1e2a1e;
+
+  --destructive: #ff6b6b;
+  --success: #69db7c;
+  --warning: #ffd43b;
+  --info: #74c0fc;
+
+  --chart-1: #e8e8e8;
+  --chart-2: #a0a0a0;
+  --chart-3: #808080;
+  --chart-4: #606060;
+  --chart-5: #404040;
+
+  --sidebar: #2a3a2a;
+  --sidebar-foreground: #e8e8e8;
+  --sidebar-primary: #e8e8e8;
+  --sidebar-primary-foreground: #1e2a1e;
+  --sidebar-accent: #e8d44d;
+  --sidebar-accent-foreground: #1e2a1e;
+  --sidebar-border: rgba(255, 255, 255, 0.4);
+  --sidebar-ring: rgba(255, 255, 255, 0.2);
+
+  --first-light-shadow: 3px 3px 0px rgba(0, 0, 0, 0.4);
+  --first-light-shadow-hover: 2px 2px 0px rgba(0, 0, 0, 0.4);
+  --first-light-shadow-active: 0px 0px 0px rgba(0, 0, 0, 0.4);
+}
+
+/* ============================================
+   FIRST LIGHT THEME - Component Styles
+   ============================================ */
+
+/* Apply first-light filter to containers and interactive elements
+ * NOTE: These styles ONLY apply when .theme-first-light is active.
+ * For standalone first-light.css import, :root gets first-light variables
+ * but component styles need .theme-first-light class for Storybook compatibility.
+ */
+.theme-first-light [data-slot="card"],
+.theme-first-light [data-slot="alert"],
+.theme-first-light [data-slot="button"],
+.theme-first-light [data-slot="input"],
+.theme-first-light [data-slot="textarea"],
+.theme-first-light [data-slot="select-trigger"],
+.theme-first-light [data-slot="separator"],
+.theme-first-light [data-slot="dialog-content"],
+.theme-first-light [data-slot="alert-dialog-content"],
+.theme-first-light [data-slot="sheet-content"],
+.theme-first-light [data-slot="drawer-content"],
+.theme-first-light [data-slot="popover-content"],
+.theme-first-light [data-slot="hover-card-content"],
+.theme-first-light [data-slot="dropdown-menu-content"],
+.theme-first-light [data-slot="context-menu-content"],
+.theme-first-light [data-slot="menubar-content"],
+.theme-first-light [data-slot="navigation-menu-popup"],
+.theme-first-light [data-slot="combobox-content"],
+.theme-first-light [data-slot="select-content"],
+.theme-first-light [data-slot="command"],
+.theme-first-light [data-sonner-toast] {
+  filter: url(#first-light-filter);
+  box-shadow: var(--first-light-shadow);
+}
+
+/* Reset filter on children so text stays crisp */
+.theme-first-light [data-slot="card"] > *,
+.theme-first-light [data-slot="alert"] > *,
+.theme-first-light [data-slot="dialog-content"] > *,
+.theme-first-light [data-slot="alert-dialog-content"] > *,
+.theme-first-light [data-slot="sheet-content"] > *,
+.theme-first-light [data-slot="drawer-content"] > *,
+.theme-first-light [data-slot="popover-content"] > *,
+.theme-first-light [data-slot="hover-card-content"] > *,
+.theme-first-light [data-slot="dropdown-menu-content"] > *,
+.theme-first-light [data-slot="context-menu-content"] > *,
+.theme-first-light [data-slot="menubar-content"] > *,
+.theme-first-light [data-slot="navigation-menu-popup"] > *,
+.theme-first-light [data-slot="combobox-content"] > *,
+.theme-first-light [data-slot="select-content"] > *,
+.theme-first-light [data-slot="command"] > * {
+  filter: none;
+}
+
+/* Button hover/active states */
+.theme-first-light [data-slot="button"]:hover {
+  transform: translate(1px, 1px);
+  box-shadow: var(--first-light-shadow-hover);
+}
+
+.theme-first-light [data-slot="button"]:active {
+  transform: translate(2px, 2px);
+  box-shadow: var(--first-light-shadow-active);
+}
+
+/* ============================================
+   FIRST LIGHT THEME - Toast Colors
+   ============================================ */
+
+/* Light mode: pastel backgrounds with dark text */
+.theme-first-light:not(.dark) [data-sonner-toast] {
+  --success-bg: oklch(from var(--success) 0.92 0.05 h / 90%);
+  --success-text: oklch(from var(--success) 0.25 c h);
+  --success-border: var(--success);
+  --error-bg: oklch(from var(--destructive) 0.92 0.05 h / 90%);
+  --error-text: oklch(from var(--destructive) 0.35 c h);
+  --error-border: var(--destructive);
+  --warning-bg: oklch(from var(--warning) 0.92 0.05 h / 90%);
+  --warning-text: oklch(from var(--warning) 0.35 c h);
+  --warning-border: var(--warning);
+  --info-bg: oklch(from var(--info) 0.92 0.05 h / 90%);
+  --info-text: oklch(from var(--info) 0.3 c h);
+  --info-border: var(--info);
+}
+
+/* Dark mode: darker backgrounds with light text */
+.theme-first-light.dark [data-sonner-toast] {
+  --success-bg: oklch(from var(--success) 0.25 c h / 90%);
+  --success-border: oklch(from var(--success) l c h / 50%);
+  --error-bg: oklch(from var(--destructive) 0.25 c h / 90%);
+  --error-border: oklch(from var(--destructive) l c h / 50%);
+  --warning-bg: oklch(from var(--warning) 0.3 c h / 90%);
+  --warning-border: oklch(from var(--warning) l c h / 50%);
+  --info-bg: oklch(from var(--info) 0.25 c h / 90%);
+  --info-border: oklch(from var(--info) l c h / 50%);
+}
+
+/* ============================================
+   FIRST LIGHT THEME - Utility Classes
+   ============================================ */
+
+.first-light-paper {
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-color: var(--background);
+}
+
+.dark .first-light-paper {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-color: var(--background);
+}
+
+.first-light-lined {
+  background: repeating-linear-gradient(
+    transparent,
+    transparent 27px,
+    rgba(0, 0, 0, 0.1) 28px
+  );
+  background-color: var(--background);
+}
+
+.dark .first-light-lined {
+  background: repeating-linear-gradient(
+    transparent,
+    transparent 27px,
+    rgba(255, 255, 255, 0.1) 28px
+  );
+  background-color: var(--background);
+}
+
+.first-light-highlight {
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 0, 0.3),
+    rgba(255, 255, 0, 0.4),
+    rgba(255, 255, 0, 0.3)
+  );
+  padding: 0.1em 0.2em;
+}
+
+.dark .first-light-highlight {
+  background: linear-gradient(
+    to right,
+    rgba(232, 212, 77, 0.3),
+    rgba(232, 212, 77, 0.4),
+    rgba(232, 212, 77, 0.3)
+  );
+}
+
+.first-light-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.first-light-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(1.02) rotate(-0.5deg);
+  opacity: 0.7;
+}
+
+.first-light-scribble {
+  position: relative;
+}
+
+.first-light-scribble::after {
+  content: "";
+  position: absolute;
+  left: -2px;
+  bottom: -4px;
+  width: calc(100% + 4px);
+  height: 3px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    currentColor 0px,
+    currentColor 4px,
+    transparent 4px,
+    transparent 8px
+  );
+  opacity: 0.6;
+  transform: rotate(-0.5deg);
+}
+
+.first-light-light {
+  filter: url(#first-light-filter-light);
+}
+
+.first-light-heavy {
+  filter: url(#first-light-filter-heavy);
+}

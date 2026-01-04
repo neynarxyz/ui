@@ -1,0 +1,133 @@
+/* Purple Dawn Theme
+ *
+ * Elegant translucent surfaces with backdrop blur and subtle purple tint.
+ * The default theme for @neynar/ui.
+ *
+ * Usage:
+ *   @import "@neynar/ui/styles";
+ *   @import "@neynar/ui/themes/purple-dawn";
+ *
+ * For Storybook/runtime switching, add .theme-purple-dawn class to <html>
+ */
+
+@import "@fontsource-variable/figtree";
+
+:root,
+html.theme-purple-dawn {
+  --font-family: "Figtree Variable", ui-sans-serif, system-ui, sans-serif;
+  --radius: 0.625rem;
+  --surface-blur: 12px;
+
+  /* Backgrounds - purple tint (hue 290) */
+  --background: oklch(0.96 0.06 290);
+  --foreground: oklch(0.18 0.08 290);
+
+  /* Cards & Popovers - translucent with purple tint */
+  --card: oklch(0.93 0.08 290 / 75%);
+  --card-foreground: oklch(0.18 0.08 290);
+  --popover: oklch(0.93 0.08 290 / 75%);
+  --popover-foreground: oklch(0.18 0.08 290);
+
+  /* Borders - purple tinted */
+  --border: oklch(0.18 0.08 290 / 20%);
+  --input: oklch(0.88 0.06 290);
+  --ring: oklch(0.5 0.18 290);
+
+  /* Primary - dark with subtle purple */
+  --primary: oklch(0.3 0.09 290);
+  --primary-foreground: oklch(0.98 0.02 290);
+
+  /* Secondary - purple tinted */
+  --secondary: oklch(0.92 0.06 290);
+  --secondary-foreground: oklch(0.18 0.08 290 / 85%);
+
+  /* Muted - purple tinted */
+  --muted: oklch(0.92 0.06 290);
+  --muted-foreground: oklch(0.18 0.08 290 / 60%);
+  --subtle-foreground: oklch(0.18 0.08 290 / 40%);
+
+  /* Accent - purple tinted */
+  --accent: oklch(0.9 0.08 290);
+  --accent-foreground: oklch(0.18 0.08 290 / 85%);
+
+  /* Semantic colors */
+  --destructive: oklch(0.58 0.22 27);
+  --success: oklch(0.55 0.18 145);
+  --warning: oklch(0.65 0.18 65);
+  --info: oklch(0.55 0.18 230);
+
+  /* Charts */
+  --chart-1: oklch(0.809 0.105 251.813);
+  --chart-2: oklch(0.623 0.214 259.815);
+  --chart-3: oklch(0.546 0.245 262.881);
+  --chart-4: oklch(0.488 0.243 264.376);
+  --chart-5: oklch(0.424 0.199 265.638);
+
+  /* Sidebar - purple tinted */
+  --sidebar: oklch(0.965 0.04 290);
+  --sidebar-foreground: oklch(0.15 0.04 290);
+  --sidebar-primary: oklch(0.22 0.04 290);
+  --sidebar-primary-foreground: oklch(0.98 0.015 290);
+  --sidebar-accent: oklch(0.92 0.045 290);
+  --sidebar-accent-foreground: oklch(0.15 0.04 290 / 85%);
+  --sidebar-border: oklch(0.15 0.04 290 / 15%);
+  --sidebar-ring: oklch(0.55 0.12 290);
+}
+
+.dark,
+html.theme-purple-dawn.dark {
+  /* Backgrounds - purple tint (hue 290) */
+  --background: oklch(0.145 0.02 290);
+  --foreground: oklch(0.985 0.01 290);
+
+  /* Cards & Popovers - frosted glass with purple tint */
+  --card: oklch(0.205 0.03 290 / 75%);
+  --card-foreground: oklch(0.985 0.01 290);
+  --popover: oklch(0.21 0.035 290 / 75%);
+  --popover-foreground: oklch(0.985 0.01 290);
+
+  /* Borders & Inputs - purple tinted */
+  --border: oklch(0.985 0.01 290 / 15%);
+  --input: oklch(0.985 0.01 290 / 12%);
+  --ring: oklch(0.6 0.12 290);
+
+  /* Primary */
+  --primary: oklch(0.87 0.02 290);
+  --primary-foreground: oklch(0.18 0.025 290);
+
+  /* Secondary - purple tinted */
+  --secondary: oklch(0.26 0.035 290);
+  --secondary-foreground: oklch(0.985 0.01 290 / 85%);
+
+  /* Muted - purple tinted */
+  --muted: oklch(0.26 0.035 290);
+  --muted-foreground: oklch(0.985 0.01 290 / 60%);
+  --subtle-foreground: oklch(0.985 0.01 290 / 40%);
+
+  /* Accent - purple for hover states */
+  --accent: oklch(0.35 0.06 290);
+  --accent-foreground: oklch(0.985 0.01 290 / 85%);
+
+  /* Semantic colors - slightly adjusted for purple bg */
+  --destructive: oklch(0.704 0.191 22.216);
+  --success: oklch(0.65 0.18 145);
+  --warning: oklch(0.75 0.16 65);
+  --info: oklch(0.65 0.18 230);
+
+  /* Charts */
+  --chart-1: oklch(0.809 0.105 251.813);
+  --chart-2: oklch(0.623 0.214 259.815);
+  --chart-3: oklch(0.546 0.245 262.881);
+  --chart-4: oklch(0.488 0.243 264.376);
+  --chart-5: oklch(0.424 0.199 265.638);
+
+  /* Sidebar - purple tinted */
+  --sidebar: oklch(0.19 0.025 290);
+  --sidebar-foreground: oklch(0.985 0.01 290);
+  --sidebar-primary: oklch(0.87 0.02 290);
+  --sidebar-primary-foreground: oklch(0.18 0.025 290);
+  --sidebar-accent: oklch(0.27 0.035 290);
+  --sidebar-accent-foreground: oklch(0.985 0.01 290 / 85%);
+  --sidebar-border: oklch(0.985 0.01 290 / 15%);
+  --sidebar-ring: oklch(0.6 0.12 290);
+}

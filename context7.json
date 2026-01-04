@@ -1,0 +1,31 @@
+{
+  "$schema": "https://context7.com/schema/context7.json",
+  "projectTitle": "@neynar/ui",
+  "description": "React component library built on Base UI primitives + Tailwind CSS v4. 53 production-ready components with per-component imports, SSR-safe dark mode, and two visual themes. Powers Neynar App Studio.",
+  "folders": [
+    ".llm",
+    "docs",
+    "src/components",
+    "src/hooks",
+    "src/lib"
+  ],
+  "excludeFolders": [
+    "node_modules",
+    "dist",
+    ".storybook",
+    "coverage"
+  ],
+  "excludeFiles": [
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "rules": [
+    "Import components from their dedicated paths: import { Button } from '@neynar/ui/button'",
+    "Import themes as CSS: import '@neynar/ui/themes/purple-dawn'",
+    "Use ColorModeInitializer in <head> for SSR-safe dark mode",
+    "All components have data-slot attributes for CSS targeting",
+    "Use the render prop (not asChild) for component polymorphism",
+    "Compound components export multiple parts from the same path",
+    "Use cn() utility from '@neynar/ui/utils' for class merging"
+  ]
+}

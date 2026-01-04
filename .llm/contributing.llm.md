@@ -1,0 +1,272 @@
+# Contributing to @neynar/ui (LLM Guide)
+
+Technical reference for AI assistants modifying this package.
+
+## Critical Rules
+
+1. **Never export defaults** - Named exports only
+2. **Always add `data-slot`** - Root element of every component
+3. **Use `type` not `interface`** - For prop definitions
+4. **`"use client"` only when needed** - Only for components using React hooks
+5. **Run type-check** - `yarn type-check` must pass before committing
+
+## File Locations
+
+```
+packages/ui/
+├── src/
+│   ├── components/
+│   │   ├── ui/                    # Base UI components
+│   │   │   ├── button.tsx
+│   │   │   └── stories/           # Storybook stories
+│   │   │       └── button.stories.tsx
+│   │   └── neynar/                # Neynar-specific components
+│   │       ├── typography/
+│   │       ├── color-mode/
+│   │       └── first-light/
+│   ├── hooks/                     # Custom hooks
+│   ├── lib/                       # Utilities (cn, variants)
+│   └── styles/                    # CSS and themes
+│       └── themes/
+├── .llm/                          # LLM documentation
+│   ├── components/                # Per-component docs
+│   ├── index.llm.md              # Package overview
+│   ├── hooks.llm.md
+│   ├── utilities.llm.md
+│   └── theming.llm.md
+└── package.json                   # Exports map (auto-generated)
+```
+
+## Component Template
+
+```tsx
+// Add "use client" ONLY if component uses hooks
+import { Primitive } from "@base-ui/react/primitive"
+import { cva, type VariantProps } from "class-variance-authority"
+import { cn } from "@/lib/utils"
+
+const componentVariants = cva("base-classes", {
+  variants: {
+    variant: {
+      default: "...",
+      secondary: "...",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+})
+
+type ComponentProps = Primitive.Props & VariantProps<typeof componentVariants>
+
+/**
+ * Brief description.
+ *
+ * @example
+ * ```tsx
+ * <Component>Content</Component>
+ * ```
+ */
+function Component({ className, variant, ...props }: ComponentProps) {
+  return (
+    <Primitive
+      data-slot="component"
+      className={cn(componentVariants({ variant, className }))}
+      {...props}
+    />
+  )
+}
+
+export { Component, componentVariants, type ComponentProps }
+```
+
+## Story Template
+
+```tsx
+import type { Meta, StoryObj } from "@storybook/react"
+import { Component } from "../component"
+
+const meta: Meta<typeof Component> = {
+  title: "UI/Component",
+  component: Component,
+  tags: ["autodocs"],
+}
+
+export default meta
+type Story = StoryObj<typeof Component>
+
+export const Default: Story = {
+  args: { children: "Example" },
+}
+
+export const Variants: Story = {
+  render: () => (
+    <div className="flex gap-4">
+      <Component variant="default">Default</Component>
+      <Component variant="secondary">Secondary</Component>
+    </div>
+  ),
+}
+```
+
+## LLM Documentation Template
+
+```markdown
+# ComponentName
+
+One sentence description.
+
+## Import
+
+\`\`\`tsx
+import { Component } from "@neynar/ui/component"
+\`\`\`
+
+## Usage
+
+\`\`\`tsx
+<Component>Content</Component>
+\`\`\`
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| variant | "default" \| "secondary" | "default" | Visual style |
+
+## Examples
+
+### With variant
+\`\`\`tsx
+<Component variant="secondary">Secondary</Component>
+\`\`\`
+```
+
+## data-slot Convention
+
+Every component root element MUST have `data-slot`:
+
+```tsx
+// Single component
+<Button data-slot="button" />
+
+// Compound component
+<Dialog data-slot="dialog">
+  <DialogTrigger data-slot="dialog-trigger" />
+  <DialogContent data-slot="dialog-content">
+    <DialogHeader data-slot="dialog-header" />
+    <DialogTitle data-slot="dialog-title" />
+    <DialogDescription data-slot="dialog-description" />
+    <DialogFooter data-slot="dialog-footer" />
+  </DialogContent>
+</Dialog>
+```
+
+## "use client" Rules
+
+**ADD** when component:
+- Uses `useState`, `useEffect`, `useRef`, `useContext`
+- Uses custom hooks (`useColorMode`, `useMobile`)
+- Has event handlers that need client hydration
+
+**OMIT** when component:
+- Is a pure wrapper around Base UI primitive
+- Only passes props through
+- Has no React hooks
+
+Current components with `"use client"`:
+- avatar, calendar, carousel, chart, collapsible
+- combobox, command, dialog, drawer, field
+- hover-card, input-otp, label, progress, resizable
+- select, sidebar, slider, switch, tabs
+- toggle-group, tooltip
+- color-mode/*, first-light/*
+
+## Semantic Color Tokens
+
+```css
+/* Backgrounds */
+bg-background, bg-card, bg-popover, bg-muted, bg-accent
+
+/* Foregrounds */
+text-foreground, text-muted-foreground, text-card-foreground
+
+/* Status */
+bg-primary, text-primary-foreground
+bg-secondary, text-secondary-foreground
+bg-destructive, text-destructive
+bg-success, text-success
+bg-warning, text-warning
+bg-info, text-info
+
+/* Borders */
+border-border, border-input, border-ring
+```
+
+## Package.json Exports
+
+Exports are auto-generated by `scripts/generate-exports.ts` during build.
+
+Each component gets an entry:
+```json
+{
+  "./button": {
+    "types": "./dist/components/ui/button.d.ts",
+    "import": "./dist/components/ui/button.js"
+  }
+}
+```
+
+## Validation Commands
+
+```bash
+# Must pass before commit
+yarn type-check    # TypeScript
+yarn lint          # ESLint
+yarn build         # Build check
+
+# Development
+yarn storybook     # Visual testing
+```
+
+## Common Patterns
+
+### Polymorphism with `render` prop
+```tsx
+<Button render={<a href="/link" />}>Link Button</Button>
+```
+
+### Compound Components
+```tsx
+<Dialog>
+  <DialogTrigger>Open</DialogTrigger>
+  <DialogContent>
+    <DialogTitle>Title</DialogTitle>
+    <DialogDescription>Description</DialogDescription>
+  </DialogContent>
+</Dialog>
+```
+
+### Forwarding refs (handled by Base UI)
+```tsx
+// Base UI handles ref forwarding automatically
+// No need for forwardRef wrapper
+function Component(props: ComponentProps) {
+  return <Primitive {...props} />
+}
+```
+
+### Icon sizing
+```tsx
+// Icons auto-size via [&_svg:not([class*='size-'])]:size-4
+<Button>
+  <PlusIcon /> {/* Inherits size-4 */}
+  Add Item
+</Button>
+```
+
+## Debugging Tips
+
+- Check `data-slot` attributes in DevTools for component boundaries
+- Use `?path=/story/ui-button--default` in Storybook URL
+- Run `yarn type-check 2>&1 | head -20` for focused error output

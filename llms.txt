@@ -1,0 +1,137 @@
+# @neynar/ui
+
+> React component library built on Base UI primitives + Tailwind CSS v4. 53 production-ready components with per-component imports, SSR-safe dark mode, and two visual themes. Powers Neynar App Studio.
+
+## Quick Start
+
+```tsx
+import { Button } from "@neynar/ui/button";
+import { Card, CardHeader, CardContent } from "@neynar/ui/card";
+import "@neynar/ui/themes/purple-dawn";
+
+export function App() {
+  return (
+    <Card>
+      <CardHeader>Welcome</CardHeader>
+      <CardContent>
+        <Button>Get Started</Button>
+      </CardContent>
+    </Card>
+  );
+}
+```
+
+## Key Patterns
+
+- **Import**: `import { Component } from "@neynar/ui/component"` (lowercase, kebab-case)
+- **Theme**: `import "@neynar/ui/themes/purple-dawn"` or `first-light`
+- **Color mode**: `<ColorModeInitializer />` in `<head>` for SSR-safe dark mode
+- **Utility**: `cn()` from `@neynar/ui/utils` for class merging
+- **Polymorphism**: Use `render` prop (not `asChild`) for custom elements
+- **CSS targeting**: All components have `data-slot` attributes
+
+## Full Documentation
+
+- [llms-full.txt](./llms-full.txt): Complete documentation (~16k lines, all 53 components)
+
+## Documentation Index
+
+- [Package Overview](.llm/index.llm.md): Quick start, import patterns, component categories
+- [Theming Guide](.llm/theming.llm.md): Themes, color mode, CSS variables, customization
+- [Hooks](.llm/hooks.llm.md): useIsMobile responsive hook
+- [Utilities](.llm/utilities.llm.md): cn() class merging
+- [Contributing](.llm/contributing.llm.md): Component patterns, data-slot convention, templates
+
+## Core Inputs
+
+- [Button](.llm/components/button.llm.md): 9 variants, 8 sizes, icon support
+- [Input](.llm/components/input.llm.md): Text input with validation states
+- [Textarea](.llm/components/textarea.llm.md): Multi-line text input
+- [Checkbox](.llm/components/checkbox.llm.md): Boolean toggle with indeterminate
+- [Switch](.llm/components/switch.llm.md): Toggle switch control
+- [Select](.llm/components/select.llm.md): Dropdown selection
+- [Combobox](.llm/components/combobox.llm.md): Searchable select with autocomplete
+- [Slider](.llm/components/slider.llm.md): Range input
+- [RadioGroup](.llm/components/radio-group.llm.md): Single selection from options
+- [Toggle](.llm/components/toggle.llm.md): Pressable toggle button
+- [ToggleGroup](.llm/components/toggle-group.llm.md): Multiple toggle buttons
+
+## Form & Field
+
+- [Field](.llm/components/field.llm.md): Form field wrapper with label/description/error
+- [Label](.llm/components/label.llm.md): Accessible form labels
+- [InputGroup](.llm/components/input-group.llm.md): Input with prefix/suffix addons
+- [InputOTP](.llm/components/input-otp.llm.md): One-time password input
+- [Calendar](.llm/components/calendar.llm.md): Date picker calendar
+- [ButtonGroup](.llm/components/button-group.llm.md): Connected button group
+
+## Layout & Structure
+
+- [Card](.llm/components/card.llm.md): Content container with header/footer
+- [Accordion](.llm/components/accordion.llm.md): Expandable content sections
+- [Collapsible](.llm/components/collapsible.llm.md): Show/hide content
+- [Separator](.llm/components/separator.llm.md): Visual divider
+- [AspectRatio](.llm/components/aspect-ratio.llm.md): Maintain aspect ratio
+- [ScrollArea](.llm/components/scroll-area.llm.md): Custom scrollbars
+- [Resizable](.llm/components/resizable.llm.md): Resizable panels
+- [Table](.llm/components/table.llm.md): Data tables
+
+## Navigation & Menus
+
+- [Tabs](.llm/components/tabs.llm.md): Tab-based navigation
+- [DropdownMenu](.llm/components/dropdown-menu.llm.md): Trigger-based dropdown
+- [ContextMenu](.llm/components/context-menu.llm.md): Right-click menu
+- [Menubar](.llm/components/menubar.llm.md): Horizontal menu bar
+- [NavigationMenu](.llm/components/navigation-menu.llm.md): Site navigation
+- [Breadcrumb](.llm/components/breadcrumb.llm.md): Path indicator
+- [Pagination](.llm/components/pagination.llm.md): Page navigation
+- [Sidebar](.llm/components/sidebar.llm.md): Collapsible navigation
+
+## Overlays & Dialogs
+
+- [Dialog](.llm/components/dialog.llm.md): Modal dialog
+- [AlertDialog](.llm/components/alert-dialog.llm.md): Confirmation dialog
+- [Sheet](.llm/components/sheet.llm.md): Side panel overlay
+- [Drawer](.llm/components/drawer.llm.md): Bottom drawer (mobile)
+- [Popover](.llm/components/popover.llm.md): Floating content
+- [Tooltip](.llm/components/tooltip.llm.md): Hover information
+- [HoverCard](.llm/components/hover-card.llm.md): Rich hover preview
+
+## Feedback & Status
+
+- [Alert](.llm/components/alert.llm.md): Contextual messages with variants
+- [Badge](.llm/components/badge.llm.md): Status indicators
+- [Progress](.llm/components/progress.llm.md): Progress bars
+- [Skeleton](.llm/components/skeleton.llm.md): Loading placeholders
+- [Spinner](.llm/components/spinner.llm.md): Loading spinner
+- [Sonner](.llm/components/sonner.llm.md): Toast notifications
+- [Empty](.llm/components/empty.llm.md): Empty state placeholder
+
+## Theme Utilities
+
+- [ColorMode](.llm/components/color-mode.llm.md): SSR-safe color mode with system detection
+- [FirstLight](.llm/components/first-light.llm.md): SVG filters for First Light theme
+
+## Advanced
+
+- [Avatar](.llm/components/avatar.llm.md): User avatars with fallback
+- [Carousel](.llm/components/carousel.llm.md): Content slider
+- [Chart](.llm/components/chart.llm.md): Recharts integration
+- [Command](.llm/components/command.llm.md): Command palette (cmdk)
+- [Kbd](.llm/components/kbd.llm.md): Keyboard shortcut display
+- [Item](.llm/components/item.llm.md): List items with icons
+
+## Typography
+
+- [Title](.llm/components/title.llm.md): Heading component (h1-h6)
+- [Text](.llm/components/text.llm.md): Paragraph text with variants
+- [Code](.llm/components/code.llm.md): Inline code styling
+- [Blockquote](.llm/components/blockquote.llm.md): Quote blocks
+
+## Optional
+
+These contain secondary/supplementary information:
+
+- [CHANGELOG](./CHANGELOG.md): Release history
+- [README](./README.md): Full package documentation
+- [Human Docs](./docs/): Integration guides and troubleshooting
