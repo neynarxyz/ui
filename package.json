@@ -1,6 +1,6 @@
 {
   "name": "@neynar/ui",
-  "version": "0.5.1",
+  "version": "1.0.0",
   "license": "MIT",
   "author": "Neynar Inc.",
   "description": "React UI component library built on Base UI and Tailwind CSS",
