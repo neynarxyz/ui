@@ -17,7 +17,8 @@
     ".claude",
     ".github",
     "scripts",
-    "coverage"
+    "coverage",
+    "**/stories/**"
   ],
   "excludeFiles": [
     "CHANGELOG.md",
