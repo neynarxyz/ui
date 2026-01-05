@@ -7,21 +7,28 @@
     "docs",
     "src/components",
     "src/hooks",
-    "src/lib"
+    "src/lib",
+    "src/styles"
   ],
   "excludeFolders": [
     "node_modules",
     "dist",
     ".storybook",
+    ".claude",
+    ".github",
+    "scripts",
     "coverage"
   ],
   "excludeFiles": [
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "yarn.lock",
+    "llms-full.txt"
   ],
   "rules": [
     "Import components from their dedicated paths: import { Button } from '@neynar/ui/button'",
     "Import themes as CSS: import '@neynar/ui/themes/purple-dawn'",
+    "Base styles required: @import '@neynar/ui/styles' in your CSS file",
     "Use ColorModeInitializer in <head> for SSR-safe dark mode",
     "All components have data-slot attributes for CSS targeting",
     "Use the render prop (not asChild) for component polymorphism",
