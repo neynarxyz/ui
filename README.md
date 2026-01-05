@@ -14,9 +14,9 @@
 
 ## What is this? 🤔
 
-@neynar/ui is a full-featured React component library—the same components that power Neynar Studio and our suite of developer tools.
+@neynar/ui is AI-first React component library for coding agents. LLM-optimized docs, sensible defaults, zero config. Built on shadcn patterns, Base UI, and Tailwind CSS v4.".
 
-**One package. 50+ components. Tailwind CSS v4 powered.**
+**One package. 50+ components. Shadcn patterns, Base UI, and Tailwind CSS v4 powered.**
 
 ```css
 /* src/index.css */
@@ -42,14 +42,14 @@ export default function App() {
 
 ## Why @neynar/ui? ✨
 
-| Feature | Description |
-|---|---|
-| **Built for AI** | Designed for AI coding assistants—sensible defaults, clear APIs, zero config. LLMs love it. |
-| **Modern Stack** | shadcn/ui patterns on Base UI primitives, Tailwind CSS v4, OKLCH colors, TypeScript-first. |
-| **Production-Ready** | Battle-tested in Neynar Studio and used by developers building on Farcaster. |
-| **RSC-Ready** | `"use client"` directives baked in. Use interactive components from Server Components—no wrapping needed. |
-| **Fully Accessible** | WCAG 2.1 AA compliant with keyboard navigation and screen reader support. |
-| **Themes** | Ships with Purple Dawn and First Light themes. Easy to customize or create your own with CSS variables. |
+| Feature              | Description                                                                                               |
+| -------------------- | --------------------------------------------------------------------------------------------------------- |
+| **Built for AI**     | Designed for AI coding assistants—sensible defaults, clear APIs, zero config. LLMs love it.               |
+| **Modern Stack**     | shadcn/ui patterns on Base UI primitives, Tailwind CSS v4, OKLCH colors, TypeScript-first.                |
+| **Production-Ready** | Battle-tested in Neynar Studio and used by developers building on Farcaster.                              |
+| **RSC-Ready**        | `"use client"` directives baked in. Use interactive components from Server Components—no wrapping needed. |
+| **Fully Accessible** | WCAG 2.1 AA compliant with keyboard navigation and screen reader support.                                 |
+| **Themes**           | Ships with Purple Dawn and First Light themes. Easy to customize or create your own with CSS variables.   |
 
 ---
 
@@ -117,23 +117,23 @@ Improvements we've made to existing components:
 
 ### Components
 
-| Category | Components |
-|----------|------------|
-| **Core Inputs** | Button, Checkbox, Combobox, Input, RadioGroup, Select, Slider, Switch, Textarea, Toggle, ToggleGroup |
-| **Form & Field** | ButtonGroup, Calendar, Field, InputGroup, InputOTP, Label |
-| **Layout & Structure** | Accordion, AspectRatio, Card, Collapsible, Resizable, Separator, Table |
-| **Navigation & Menus** | Breadcrumb, ContextMenu, DropdownMenu, Menubar, NavigationMenu, Pagination, Tabs |
-| **Overlays & Dialogs** | AlertDialog, Dialog, Drawer, HoverCard, Popover, Sheet, Tooltip |
-| **Feedback & Status** | Alert, Badge, Empty, Progress, Skeleton, Sonner, Spinner |
-| **Advanced & Specialized** | Avatar, Carousel, Chart, Command, Kbd, ScrollArea, Sidebar |
-| **Neynar Custom** | ColorModeInitializer, ColorModeToggle, Title, Text, Code, Blockquote, Caption, Overline |
+| Category                   | Components                                                                                           |
+| -------------------------- | ---------------------------------------------------------------------------------------------------- |
+| **Core Inputs**            | Button, Checkbox, Combobox, Input, RadioGroup, Select, Slider, Switch, Textarea, Toggle, ToggleGroup |
+| **Form & Field**           | ButtonGroup, Calendar, Field, InputGroup, InputOTP, Label                                            |
+| **Layout & Structure**     | Accordion, AspectRatio, Card, Collapsible, Resizable, Separator, Table                               |
+| **Navigation & Menus**     | Breadcrumb, ContextMenu, DropdownMenu, Menubar, NavigationMenu, Pagination, Tabs                     |
+| **Overlays & Dialogs**     | AlertDialog, Dialog, Drawer, HoverCard, Popover, Sheet, Tooltip                                      |
+| **Feedback & Status**      | Alert, Badge, Empty, Progress, Skeleton, Sonner, Spinner                                             |
+| **Advanced & Specialized** | Avatar, Carousel, Chart, Command, Kbd, ScrollArea, Sidebar                                           |
+| **Neynar Custom**          | ColorModeInitializer, ColorModeToggle, Title, Text, Code, Blockquote, Caption, Overline              |
 
 ### Hooks & Utilities
 
-| Export | Description |
-|--------|-------------|
+| Export                  | Description                                            |
+| ----------------------- | ------------------------------------------------------ |
 | `@neynar/ui/use-mobile` | `useMobile()` hook for responsive breakpoint detection |
-| `@neynar/ui/utils` | `cn()` utility for merging Tailwind classes |
+| `@neynar/ui/utils`      | `cn()` utility for merging Tailwind classes            |
 
 ---
 
@@ -148,7 +148,11 @@ import { Input } from "@neynar/ui/input";
 import { Card, CardHeader, CardContent } from "@neynar/ui/card";
 
 // Color Mode
-import { ColorModeInitializer, ColorModeToggle, useColorMode } from "@neynar/ui/color-mode";
+import {
+  ColorModeInitializer,
+  ColorModeToggle,
+  useColorMode,
+} from "@neynar/ui/color-mode";
 
 // Typography
 import { Title, Text, Caption } from "@neynar/ui/typography";
@@ -214,13 +218,17 @@ All components include `data-slot` attributes for targeted CSS and testing:
 
 ```css
 /* Style specific component parts */
-[data-slot="dialog-content"] { backdrop-filter: blur(20px); }
-[data-slot="button"] { font-weight: 600; }
+[data-slot="dialog-content"] {
+  backdrop-filter: blur(20px);
+}
+[data-slot="button"] {
+  font-weight: 600;
+}
 ```
 
 ```ts
 // Stable E2E test selectors
-page.locator('[data-slot="dialog-trigger"]').click()
+page.locator('[data-slot="dialog-trigger"]').click();
 ```
 
 ---
@@ -269,7 +277,7 @@ LLM-optimized documentation for AI coding assistants:
 - [LLM Documentation Guide](./docs/llm-documentation.md) — How to use our AI-optimized docs
 - [llms.txt](./llms.txt) — Compact overview for quick context
 - [llms-full.txt](./llms-full.txt) — Complete documentation (~16k lines)
-- [.llm/](./.llm/) — Per-component markdown docs
+- [llm/](./llm/) — Per-component markdown docs
 
 ---
 
@@ -279,11 +287,11 @@ LLM-optimized documentation for AI coding assistants:
 
 [Neynar](https://neynar.com) powers the best apps in the Farcaster ecosystem. We provide the infrastructure, APIs, and tools so you can build without managing your own nodes. See [About Neynar](./docs/about-neynar.md) for more details.
 
-| Category | Description |
-|----------|-------------|
-| **APIs** | Hubs, feeds, users, casts, reactions, channels |
-| **Infrastructure** | Managed hubs, webhooks, analytics |
-| **Tools** | SDKs, debugging, monitoring |
+| Category           | Description                                    |
+| ------------------ | ---------------------------------------------- |
+| **APIs**           | Hubs, feeds, users, casts, reactions, channels |
+| **Infrastructure** | Managed hubs, webhooks, analytics              |
+| **Tools**          | SDKs, debugging, monitoring                    |
 
 **Thousands of developers** trust Neynar to power their social applications.
 
@@ -296,6 +304,7 @@ LLM-optimized documentation for AI coding assistants:
 Made by the Neynar team.
 
 Built on the shoulders of giants:
+
 - [shadcn/ui](https://ui.shadcn.com) for the component patterns
 - [Base UI](https://base-ui.com) for accessible primitives
 - [Tailwind CSS](https://tailwindcss.com) for styling

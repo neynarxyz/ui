@@ -32,7 +32,7 @@ For each component, launches a `component-manager` agent that:
 1. Reads source file and stories
 2. Researches Base UI docs via Context7
 3. Adds TSDoc comments to custom props and exports
-4. Generates `.llm/components/{component}.llm.md`
+4. Generates `llm/components/{component}.llm.md`
 5. Updates indexes if component is new
 
 ### New Component Mode (`--new`)
@@ -41,7 +41,7 @@ Creates a new component from scratch:
 
 1. Creates source file with Base UI primitive + data-slot
 2. Creates Storybook story with Default and Variants
-3. Generates `.llm/components/{component}.llm.md`
+3. Generates `llm/components/{component}.llm.md`
 4. Updates `llms.txt` with link
 5. Updates `index.llm.md` with table row
 6. Runs type-check to verify
@@ -72,7 +72,7 @@ Scans `src/components/ui/*.tsx` and processes in batches of 5.
 
 | Mode | Files Created/Updated |
 |------|----------------------|
-| `--doc` | Source TSDoc, `.llm/components/{component}.llm.md` |
+| `--doc` | Source TSDoc, `llm/components/{component}.llm.md` |
 | `--new` | Source file, story, `.llm.md`, `llms.txt`, `index.llm.md` |
 
 ## Components List
@@ -102,6 +102,6 @@ Neynar components (from `src/components/neynar/`):
 ## Related Files
 
 - Agent: `.claude/agents/component-manager.md`
-- Output: `.llm/components/`
-- Index: `.llm/index.llm.md`
+- Output: `llm/components/`
+- Index: `llm/index.llm.md`
 - Entry point: `llms.txt`
