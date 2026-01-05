@@ -31,7 +31,7 @@ Real-time notifications for on-chain and off-chain events. Trade webhooks let yo
 ### Neynar User Score
 Reputation scoring used by developers across the ecosystem to manage spam and user quality in apps, agents, and products.
 
-### Mini App Studio
+### Neynar Studio
 Go from text prompt to deployed mini app. Farcaster-aware vibecoding with signed manifests and shareable URLs—no coding required.
 
 ### Notifications

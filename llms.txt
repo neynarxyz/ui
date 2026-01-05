@@ -1,13 +1,58 @@
 # @neynar/ui
 
-> React component library built on Base UI primitives + Tailwind CSS v4. 53 production-ready components with per-component imports, SSR-safe dark mode, and two visual themes. Powers Neynar App Studio.
+> React component library built on Base UI primitives + Tailwind CSS v4. 53 production-ready components with per-component imports, SSR-safe dark mode, and two visual themes. Powers Neynar Studio.
+
+## Prerequisites
+
+**Tailwind CSS v4 is required.** The package exports CSS that uses `@import "tailwindcss"`.
+
+### Vite Setup
+
+```bash
+npm install tailwindcss @tailwindcss/vite
+```
+
+```ts
+// vite.config.ts
+import tailwindcss from "@tailwindcss/vite";
+export default defineConfig({ plugins: [react(), tailwindcss()] });
+```
+
+```css
+/* src/index.css - MUST use CSS @import, not JS import */
+@import "@neynar/ui/styles";
+@import "@neynar/ui/themes/purple-dawn";
+```
+
+```tsx
+// src/main.tsx
+import "./index.css";
+```
+
+### Next.js Setup
+
+```bash
+npm install tailwindcss @tailwindcss/postcss
+```
+
+```js
+// postcss.config.js
+export default { plugins: { "@tailwindcss/postcss": {} } };
+```
+
+```css
+/* app/globals.css */
+@import "@neynar/ui/styles";
+@import "@neynar/ui/themes/purple-dawn";
+```
 
 ## Quick Start
+
+Once Tailwind is configured, use components:
 
 ```tsx
 import { Button } from "@neynar/ui/button";
 import { Card, CardHeader, CardContent } from "@neynar/ui/card";
-import "@neynar/ui/themes/purple-dawn";
 
 export function App() {
   return (

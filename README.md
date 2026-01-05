@@ -14,13 +14,18 @@
 
 ## What is this? 🤔
 
-@neynar/ui is a full-featured React component library—the same components that power Neynar App Studio and our suite of developer tools.
+@neynar/ui is a full-featured React component library—the same components that power Neynar Studio and our suite of developer tools.
 
-**One package. 50+ components. Zero configuration.**
+**One package. 50+ components. Tailwind CSS v4 powered.**
+
+```css
+/* src/index.css */
+@import "@neynar/ui/styles";
+@import "@neynar/ui/themes/purple-dawn";
+```
 
 ```tsx
-import "@neynar/ui/styles";
-import "@neynar/ui/themes/purple-dawn";
+import "./index.css";
 import { Button } from "@neynar/ui/button";
 import { Card } from "@neynar/ui/card";
 import { Alert } from "@neynar/ui/alert";
@@ -41,7 +46,7 @@ export default function App() {
 |---|---|
 | **Built for AI** | Designed for AI coding assistants—sensible defaults, clear APIs, zero config. LLMs love it. |
 | **Modern Stack** | shadcn/ui patterns on Base UI primitives, Tailwind CSS v4, OKLCH colors, TypeScript-first. |
-| **Production-Ready** | Battle-tested in Neynar App Studio and used by developers building on Farcaster. |
+| **Production-Ready** | Battle-tested in Neynar Studio and used by developers building on Farcaster. |
 | **RSC-Ready** | `"use client"` directives baked in. Use interactive components from Server Components—no wrapping needed. |
 | **Fully Accessible** | WCAG 2.1 AA compliant with keyboard navigation and screen reader support. |
 | **Themes** | Ships with Purple Dawn and First Light themes. Easy to customize or create your own with CSS variables. |
@@ -59,6 +64,33 @@ pnpm add @neynar/ui
 
 # yarn
 yarn add @neynar/ui
+```
+
+### Tailwind CSS v4 Setup (Required)
+
+This package requires Tailwind CSS v4. The exported styles use `@import "tailwindcss"`.
+
+**Vite:**
+
+```bash
+npm install tailwindcss @tailwindcss/vite
+```
+
+```ts
+// vite.config.ts
+import tailwindcss from "@tailwindcss/vite";
+export default defineConfig({ plugins: [react(), tailwindcss()] });
+```
+
+**Next.js:**
+
+```bash
+npm install tailwindcss @tailwindcss/postcss
+```
+
+```js
+// postcss.config.js
+export default { plugins: { "@tailwindcss/postcss": {} } };
 ```
 
 ---
@@ -133,10 +165,10 @@ import { useMobile } from "@neynar/ui/use-mobile";
 
 ## Setup & Customization 🎨
 
-Create a CSS file with your styles and theme, then import it in your app's entry point (e.g., `layout.tsx` or `main.tsx`):
+Create a CSS file with your styles and theme:
 
 ```css
-/* app/globals.css */
+/* app/globals.css or src/index.css */
 @import "@neynar/ui/styles";
 @import "@neynar/ui/themes/purple-dawn";
 
@@ -149,6 +181,15 @@ Create a CSS file with your styles and theme, then import it in your app's entry
   --primary: oklch(0.75 0.15 260); /* lighter purple */
 }
 ```
+
+Then import the CSS file in your app entry:
+
+```tsx
+// main.tsx (Vite) or layout.tsx (Next.js)
+import "./globals.css";
+```
+
+**Note:** Styles must be imported via CSS `@import`, not JS imports. The CSS files use `@import "tailwindcss"` which requires Tailwind processing.
 
 See the [Theming Guide](./docs/theming/index.md) for the full list of customizable tokens.
 
