@@ -7,7 +7,7 @@
 # Package Overview
 
 
-A React component library built on Base UI primitives + Tailwind CSS v4. Production-tested in Neynar App Studio.
+A React component library built on Base UI primitives + Tailwind CSS v4. Production-tested in Neynar Studio.
 
 ## Quick Start
 

@@ -1,4 +1,3 @@
-import { action } from "@storybook/addon-actions";
 import type { Meta, StoryObj } from "@storybook/react";
 import {
   BarChart3Icon,
@@ -522,15 +521,15 @@ export const Interactive: Story = {
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup heading="Suggestions">
-          <CommandItem onSelect={action("onSelect: calendar")}>
+          <CommandItem>
             <CalendarIcon />
             Calendar
           </CommandItem>
-          <CommandItem onSelect={action("onSelect: search-emoji")}>
+          <CommandItem>
             <SmileIcon />
             Search Emoji
           </CommandItem>
-          <CommandItem onSelect={action("onSelect: documents")}>
+          <CommandItem>
             <FileTextIcon />
             Documents
           </CommandItem>

@@ -4,15 +4,22 @@
 
 ## Quick Start
 
-Import a theme in your app's global CSS or layout:
+**Important:** Styles must be imported via CSS `@import`, not JS imports. This is because the CSS uses `@import "tailwindcss"` which requires Tailwind CSS v4 processing.
+
+```css
+/* In your global CSS file (e.g., globals.css, index.css) */
+@import "@neynar/ui/styles";
+@import "@neynar/ui/themes/purple-dawn";
+```
+
+Then import the CSS file in your app entry:
 
 ```tsx
-// Option 1: Import in CSS
-import "@neynar/ui/themes/purple-dawn"
-
-// Option 2: Import in layout.tsx
-import "@neynar/ui/themes/purple-dawn"
+// main.tsx or layout.tsx
+import "./index.css";  // or "./globals.css"
 ```
+
+**Prerequisite:** Tailwind CSS v4 must be configured. See [llms.txt](../llms.txt) for Vite/Next.js setup.
 
 ## Concepts
 

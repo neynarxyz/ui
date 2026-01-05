@@ -1,7 +1,7 @@
 {
   "$schema": "https://context7.com/schema/context7.json",
   "projectTitle": "@neynar/ui",
-  "description": "React component library built on Base UI primitives + Tailwind CSS v4. 53 production-ready components with per-component imports, SSR-safe dark mode, and two visual themes. Powers Neynar App Studio.",
+  "description": "React component library built on Base UI primitives + Tailwind CSS v4. 53 production-ready components with per-component imports, SSR-safe dark mode, and two visual themes. Powers Neynar Studio.",
   "folders": [
     ".llm",
     "docs",
