@@ -300,12 +300,12 @@ Storybook includes toolbar buttons for:
 
 ### LLM Documentation
 
-Component documentation lives in `.llm/`:
-- `.llm/components/` - Per-component docs
-- `.llm/index.llm.md` - Component index
-- `.llm/hooks.llm.md` - Hooks documentation
-- `.llm/utilities.llm.md` - Utilities documentation
-- `.llm/theming.llm.md` - Theming guide
+Component documentation lives in `llm/`:
+- `llm/components/` - Per-component docs
+- `llm/index.llm.md` - Component index
+- `llm/hooks.llm.md` - Hooks documentation
+- `llm/utilities.llm.md` - Utilities documentation
+- `llm/theming.llm.md` - Theming guide
 - `llms.txt` - Entry point for LLM docs
 
 ## Peer Dependencies

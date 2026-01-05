@@ -28,7 +28,7 @@ src/
 └── styles/                    # CSS and themes
     └── themes/
 
-.llm/                          # LLM documentation
+llm/                          # LLM documentation
 ├── components/                # Per-component docs
 ├── index.llm.md              # Package overview
 ├── hooks.llm.md

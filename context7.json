@@ -1,8 +1,8 @@
 {
   "$schema": "https://context7.com/schema/context7.json",
   "projectTitle": "@neynar/ui",
-  "description": "React component library built on Base UI primitives + Tailwind CSS v4. 53 production-ready components with per-component imports, SSR-safe dark mode, and two visual themes. Powers Neynar Studio.",
-  "folders": [".llm", "src/**"],
+  "description": "AI-first React component library for coding agents. LLM-optimized docs, sensible defaults, zero config. Built on shadcn patterns, Base UI, and Tailwind CSS v4.",
+  "folders": ["llm", "src/**"],
   "excludeFolders": ["**/stories/**"],
   "rules": [
     "Import components from their dedicated paths: import { Button } from '@neynar/ui/button'",

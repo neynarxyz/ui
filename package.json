@@ -1,9 +1,9 @@
 {
   "name": "@neynar/ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "author": "Neynar Inc.",
-  "description": "React UI component library built on Base UI and Tailwind CSS",
+  "description": "AI-first React component library for coding agents. LLM-optimized docs, sensible defaults, zero config. Built on shadcn patterns, Base UI, and Tailwind CSS v4.",
   "keywords": [
     "react",
     "ui",

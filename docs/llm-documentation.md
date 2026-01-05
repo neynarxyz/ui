@@ -9,7 +9,7 @@
 | File | Tokens | Best For |
 |------|--------|----------|
 | `llms.txt` | ~1,500 | Primary reference — import patterns, component index |
-| `.llm/` folder | ~500 each | Detailed docs for specific components |
+| `llm/` folder | ~500 each | Detailed docs for specific components |
 | `llms-full.txt` | ~100,000 | RAG systems or 1M+ context models only |
 | `context7.json` | — | Context7 MCP server integration |
 
@@ -24,7 +24,7 @@ Tell your assistant where to find @neynar/ui documentation:
 ```
 When working with @neynar/ui components, read node_modules/@neynar/ui/llms.txt
 for import patterns and component reference. For detailed component docs,
-check node_modules/@neynar/ui/.llm/components/[component-name].llm.md
+check node_modules/@neynar/ui/llm/components/[component-name].llm.md
 ```
 
 The llms.txt file gives the AI:
@@ -37,7 +37,7 @@ The llms.txt file gives the AI:
 For detailed help with a specific component:
 
 ```
-Read node_modules/@neynar/ui/.llm/components/dialog.llm.md
+Read node_modules/@neynar/ui/llm/components/dialog.llm.md
 ```
 
 Each component doc includes complete props, examples, and accessibility notes.
@@ -48,7 +48,7 @@ The `llms-full.txt` file contains complete documentation for all components (~10
 - Models with 1M+ token context (Gemini)
 - RAG pipelines that chunk and retrieve
 
-For Claude and most models, use `llms.txt` + specific `.llm/components/*.llm.md` files instead.
+For Claude and most models, use `llms.txt` + specific `llm/components/*.llm.md` files instead.
 
 ---
 
@@ -107,8 +107,8 @@ When working with @neynar/ui, use these documentation sources:
    - Theming and color mode setup
    - Key conventions
 
-2. **Component details**: Read `node_modules/@neynar/ui/.llm/components/[name].llm.md`
-   - Example: `.llm/components/dialog.llm.md` for Dialog props and examples
+2. **Component details**: Read `node_modules/@neynar/ui/llm/components/[name].llm.md`
+   - Example: `llm/components/dialog.llm.md` for Dialog props and examples
 
 3. **Full documentation**: Read `node_modules/@neynar/ui/llms-full.txt`
    - Complete reference for all 53+ components
@@ -143,7 +143,7 @@ Ask your AI assistant: "What @neynar/ui component should I use for [your use cas
 ## Tips for Best Results
 
 1. **Start with llms.txt** — It's compact and gives AI the patterns it needs
-2. **Reference specific docs** — Point to `.llm/components/X.llm.md` for detailed component help
+2. **Reference specific docs** — Point to `llm/components/X.llm.md` for detailed component help
 3. **Mention the package** — Say "@neynar/ui" so the AI knows which conventions to follow
 4. **Ask about patterns** — The docs include accessibility, keyboard nav, and common patterns
 
