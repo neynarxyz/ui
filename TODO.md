@@ -49,7 +49,7 @@ Tracking remaining work before 1.0 release.
 - [x] Convert typography `interface` to `type`
 - [x] Decided against exporting `lib/variants.ts` (internal, exposed via props)
 - [x] Add CHANGELOG.md
-- [x] Add CONTRIBUTING.md (human + .llm/contributing.llm.md)
+- [x] Add CONTRIBUTING.md (human + llm/contributing.llm.md)
 - [x] Clean up legacy `/ui:add`, `/ui:refresh` references
 - [x] Document color-mode and first-light exports
 - [x] Agent expanded to handle index management + new component workflow

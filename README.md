@@ -269,7 +269,7 @@ LLM-optimized documentation for AI coding assistants:
 - [LLM Documentation Guide](./docs/llm-documentation.md) — How to use our AI-optimized docs
 - [llms.txt](./llms.txt) — Compact overview for quick context
 - [llms-full.txt](./llms-full.txt) — Complete documentation (~16k lines)
-- [.llm/](./.llm/) — Per-component markdown docs
+- [llm/](./llm/) — Per-component markdown docs
 
 ---
 

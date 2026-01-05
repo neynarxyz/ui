@@ -96,7 +96,7 @@ Use the `/ui:manage` skill to generate LLM documentation:
 
 This runs the `ui-component-manager` agent which:
 - Adds TSDoc comments to source files
-- Creates `.llm/components/my-component.llm.md`
+- Creates `llm/components/my-component.llm.md`
 
 ### 4. Build and Validate
 
