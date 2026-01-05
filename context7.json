@@ -10,22 +10,7 @@
     "src/lib",
     "src/styles"
   ],
-  "excludeFolders": [
-    "node_modules",
-    "dist",
-    ".storybook",
-    ".claude",
-    ".github",
-    "scripts",
-    "coverage",
-    "**/stories/**"
-  ],
-  "excludeFiles": [
-    "CHANGELOG.md",
-    "LICENSE",
-    "yarn.lock",
-    "llms-full.txt"
-  ],
+  "excludeFolders": ["**/stories/**"],
   "rules": [
     "Import components from their dedicated paths: import { Button } from '@neynar/ui/button'",
     "Import themes as CSS: import '@neynar/ui/themes/purple-dawn'",
