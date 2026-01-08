@@ -254,6 +254,10 @@
   "files": [
     "dist/**",
     "src/**",
+    "llm/**",
+    "llms.txt",
+    "llms-full.txt",
+    "context7.json",
     "LICENSE",
     "README.md"
   ],
