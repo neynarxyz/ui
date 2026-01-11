@@ -5,6 +5,13 @@ All notable changes to `@neynar/ui` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.4] - 2025-01-11
+
+### Fixed
+- **Tabs**: Fixed disabled styling not applying on `TabsTrigger`. Changed `disabled:` Tailwind variant to `data-[disabled]:` to match Base UI's `data-disabled` attribute pattern.
+
+---
+
 ## [0.5.0] - 2025-01-01
 
 First production-ready release of @neynar/ui - a React component library built on Base UI primitives and Tailwind CSS v4.
