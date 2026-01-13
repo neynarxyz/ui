@@ -23,8 +23,9 @@ const config: StorybookConfig = {
     reactDocgen: "react-docgen-typescript",
   },
 
-  docs: {
-    autodocs: true,
+  viteFinal: (config) => {
+    config.base = "/ui/";
+    return config;
   },
 }
 
