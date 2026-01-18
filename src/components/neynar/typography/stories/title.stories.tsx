@@ -332,6 +332,39 @@ export const Variants: Story = {
 };
 
 /**
+ * Large multi-line titles demonstrating proper line-height for 5xl and 6xl sizes.
+ * These sizes use leading-[1.1] to prevent text overlap on wrapped lines.
+ */
+export const LargeMultiLine: Story = {
+  parameters: {
+    layout: "padded",
+  },
+  render: () => (
+    <div className="w-full max-w-2xl space-y-8">
+      <section className="space-y-4">
+        <div>
+          <h3 className="text-lg font-semibold">Large Sizes with Multi-line Text</h3>
+          <p className="text-muted-foreground text-sm">
+            5xl and 6xl sizes with proper line-height to prevent text overlap.
+          </p>
+        </div>
+        <div className="space-y-6 border rounded-lg p-6">
+          <Title order={1} size="6xl">
+            Building the Future of Social Networks Together
+          </Title>
+          <Title order={1} size="5xl">
+            Decentralized Identity for the Next Generation of Apps
+          </Title>
+          <Title order={1} size="4xl">
+            Create, Connect, and Collaborate on Farcaster
+          </Title>
+        </div>
+      </section>
+    </div>
+  ),
+};
+
+/**
  * Interactive playground for testing Title props.
  */
 export const Interactive: Story = {

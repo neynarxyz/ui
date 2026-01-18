@@ -162,8 +162,8 @@ export const titleVariants = cva("", {
       "2xl": "text-2xl leading-8 tracking-tight",
       "3xl": "text-3xl leading-9 tracking-tight",
       "4xl": "text-4xl leading-10 tracking-tighter",
-      "5xl": "text-5xl leading-none tracking-tighter",
-      "6xl": "text-6xl leading-none tracking-tighter",
+      "5xl": "text-5xl leading-[1.1] tracking-tighter",
+      "6xl": "text-6xl leading-[1.1] tracking-tighter",
     },
     weight: {
       normal: "font-normal",
