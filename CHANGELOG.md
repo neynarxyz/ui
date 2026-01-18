@@ -5,6 +5,14 @@ All notable changes to `@neynar/ui` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.6] - 2025-01-17
+
+### Fixed
+- **Resizable**: Clarified size prop documentation - numeric values are pixels, strings are percentages (e.g., `defaultSize={300}` = 300px, `defaultSize="25%"` = 25%)
+- **ResizableHandle**: Changed focus/hover/drag colors to use primary theme color instead of white/ring color for better visibility in dark mode
+
+---
+
 ## [1.0.5] - 2025-01-13
 
 ### Fixed

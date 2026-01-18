@@ -16,15 +16,19 @@ import {
 
 ```tsx
 <ResizablePanelGroup orientation="horizontal">
-  <ResizablePanel defaultSize={50}>
+  <ResizablePanel defaultSize="50%">
     Content 1
   </ResizablePanel>
   <ResizableHandle />
-  <ResizablePanel defaultSize={50}>
+  <ResizablePanel defaultSize="50%">
     Content 2
   </ResizablePanel>
 </ResizablePanelGroup>
 ```
+
+**Important:** Size values have different meanings based on type:
+- **Numbers are pixels:** `defaultSize={300}` = 300px
+- **Strings are percentages:** `defaultSize="25%"` or `defaultSize="25"` = 25%
 
 ## Components
 
@@ -51,14 +55,21 @@ import {
 
 All panels inherit props from react-resizable-panels Panel component.
 
+**Size Value Formats:**
+- **number** (e.g., `500`) → Pixels
+- **string without unit** (e.g., `"25"`) → Percentage (0-100)
+- **string with %** (e.g., `"25%"`) → Percentage
+- **string with px** (e.g., `"300px"`) → Pixels
+- **string with other units** (e.g., `"1rem"`, `"50vh"`) → CSS units
+
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | id | string | - | Panel identifier (required for persistence) |
-| defaultSize | number | - | Initial size as percentage of parent group |
-| minSize | number | 0 | Minimum size as percentage |
-| maxSize | number | 100 | Maximum size as percentage |
+| defaultSize | number \| string | - | Initial size (number=pixels, string=percentage or CSS unit) |
+| minSize | number \| string | 0 | Minimum size (number=pixels, string=percentage or CSS unit) |
+| maxSize | number \| string | 100 | Maximum size (number=pixels, string=percentage or CSS unit) |
 | collapsible | boolean | false | Allow panel to collapse below minSize |
-| collapsedSize | number | 0 | Size when collapsed |
+| collapsedSize | number \| string | 0 | Size when collapsed |
 | onResize | (size: { asPercentage: number; inPixels: number }) => void | - | Called when panel is resized |
 | className | string | - | Additional CSS classes |
 
@@ -80,16 +91,30 @@ All panels inherit props from react-resizable-panels Panel component.
 
 ## Examples
 
-### Basic Horizontal Layout
+### Basic Horizontal Layout (Percentages)
 
 ```tsx
 <ResizablePanelGroup orientation="horizontal">
-  <ResizablePanel defaultSize={40}>
+  <ResizablePanel defaultSize="40%">
     <div className="p-4">Sidebar</div>
   </ResizablePanel>
   <ResizableHandle />
-  <ResizablePanel defaultSize={60}>
+  <ResizablePanel defaultSize="60%">
     <div className="p-4">Main Content</div>
+  </ResizablePanel>
+</ResizablePanelGroup>
+```
+
+### Fixed Pixel Sidebar
+
+```tsx
+<ResizablePanelGroup orientation="horizontal">
+  <ResizablePanel defaultSize={300} minSize={200} maxSize={500}>
+    <div className="p-4">Fixed width sidebar (300px default)</div>
+  </ResizablePanel>
+  <ResizableHandle withHandle />
+  <ResizablePanel>
+    <div className="p-4">Main content fills remaining space</div>
   </ResizablePanel>
 </ResizablePanelGroup>
 ```
@@ -98,11 +123,11 @@ All panels inherit props from react-resizable-panels Panel component.
 
 ```tsx
 <ResizablePanelGroup orientation="vertical">
-  <ResizablePanel defaultSize={70}>
+  <ResizablePanel defaultSize="70%">
     <div className="p-4">Editor</div>
   </ResizablePanel>
   <ResizableHandle withHandle />
-  <ResizablePanel defaultSize={30}>
+  <ResizablePanel defaultSize="30%">
     <div className="p-4">Terminal Output</div>
   </ResizablePanel>
 </ResizablePanelGroup>
@@ -112,15 +137,15 @@ All panels inherit props from react-resizable-panels Panel component.
 
 ```tsx
 <ResizablePanelGroup orientation="horizontal">
-  <ResizablePanel defaultSize={25} minSize={15} maxSize={40}>
+  <ResizablePanel defaultSize="25%" minSize="15%" maxSize="40%">
     <div className="p-4">Navigation</div>
   </ResizablePanel>
   <ResizableHandle withHandle />
-  <ResizablePanel defaultSize={50} minSize={30}>
+  <ResizablePanel defaultSize="50%" minSize="30%">
     <div className="p-4">Content</div>
   </ResizablePanel>
   <ResizableHandle withHandle />
-  <ResizablePanel defaultSize={25} minSize={15} maxSize={40}>
+  <ResizablePanel defaultSize="25%" minSize="15%" maxSize="40%">
     <div className="p-4">Inspector</div>
   </ResizablePanel>
 </ResizablePanelGroup>
@@ -130,17 +155,17 @@ All panels inherit props from react-resizable-panels Panel component.
 
 ```tsx
 <ResizablePanelGroup orientation="horizontal">
-  <ResizablePanel defaultSize={20} minSize={15}>
-    <div className="p-4">File Explorer</div>
+  <ResizablePanel defaultSize={250} minSize={150}>
+    <div className="p-4">File Explorer (250px)</div>
   </ResizablePanel>
   <ResizableHandle withHandle />
-  <ResizablePanel defaultSize={80}>
+  <ResizablePanel>
     <ResizablePanelGroup orientation="vertical">
-      <ResizablePanel defaultSize={70}>
+      <ResizablePanel defaultSize="70%">
         <div className="p-4">Code Editor</div>
       </ResizablePanel>
       <ResizableHandle withHandle />
-      <ResizablePanel defaultSize={30} minSize={20}>
+      <ResizablePanel defaultSize="30%" minSize="20%">
         <div className="p-4">Terminal</div>
       </ResizablePanel>
     </ResizablePanelGroup>
@@ -157,11 +182,11 @@ function Dashboard() {
       id="dashboard-layout"
       orientation="horizontal"
     >
-      <ResizablePanel id="sidebar" defaultSize={25}>
+      <ResizablePanel id="sidebar" defaultSize="25%">
         <div className="p-4">Sidebar</div>
       </ResizablePanel>
       <ResizableHandle />
-      <ResizablePanel id="main" defaultSize={75}>
+      <ResizablePanel id="main" defaultSize="75%">
         <div className="p-4">Main Content</div>
       </ResizablePanel>
     </ResizablePanelGroup>
@@ -185,7 +210,7 @@ function MonitoredPanels() {
         })
       }}
     >
-      <ResizablePanel id="left" defaultSize={30}>
+      <ResizablePanel id="left" defaultSize="30%">
         <div className="p-4">Left: {sizes.left.toFixed(1)}%</div>
       </ResizablePanel>
       <ResizableHandle withHandle />
