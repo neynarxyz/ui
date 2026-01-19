@@ -1,5 +1,11 @@
 import type { StorybookConfig } from "@storybook/react-vite"
 
+// Base path for deployment - "/" for local dev, "/ui/" for production
+const basePath = process.env.STORYBOOK_BASE_PATH || "/";
+
+// Only inject base tag when deploying to subpath
+const baseTag = basePath !== "/" ? `<base href="${basePath}">` : "";
+
 const config: StorybookConfig = {
   stories: ["./docs/*.mdx", "../src/**/*.stories.@(ts|tsx)"],
 
@@ -24,9 +30,13 @@ const config: StorybookConfig = {
   },
 
   viteFinal: (config) => {
-    config.base = "/ui/";
+    config.base = basePath;
     return config;
   },
+
+  managerHead: (head) => `${baseTag}${head}`,
+
+  previewHead: (head) => `${baseTag}${head}`,
 }
 
 export default config

@@ -5,6 +5,18 @@ All notable changes to `@neynar/ui` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2025-01-18
+
+### Fixed
+- **Title**: Changed line-height from `leading-none` to `leading-[1.1]` for 5xl and 6xl sizes to prevent text overlap on multi-line headings
+- **Storybook**: Made base path configurable via `STORYBOOK_BASE_PATH` env var for local development (defaults to `/`) vs production builds (`/ui/`)
+- **ResizableHandle**: Added focus/hover/drag/active state styling with subtle 50% opacity primary color (`bg-primary/50`)
+
+### Added
+- **Claude Code Skill**: Added `/quick-fixes` skill for streamlined bug fixes and improvements workflow
+
+---
+
 ## [1.0.6] - 2025-01-17
 
 ### Fixed
