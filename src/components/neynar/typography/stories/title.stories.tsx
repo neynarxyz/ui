@@ -343,7 +343,9 @@ export const LargeMultiLine: Story = {
     <div className="w-full max-w-2xl space-y-8">
       <section className="space-y-4">
         <div>
-          <h3 className="text-lg font-semibold">Large Sizes with Multi-line Text</h3>
+          <h3 className="text-lg font-semibold">
+            Large Sizes with Multi-line Text
+          </h3>
           <p className="text-muted-foreground text-sm">
             5xl and 6xl sizes with proper line-height to prevent text overlap.
           </p>

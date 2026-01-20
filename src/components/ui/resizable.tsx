@@ -5,9 +5,18 @@ import {
   Group as PanelGroup,
   Panel,
   Separator as PanelResizeHandle,
+  type PanelImperativeHandle,
 } from "react-resizable-panels";
 
 import { cn } from "@/lib/utils";
+
+/** Duration of the collapse/expand animation in milliseconds. */
+const TRANSITION_DURATION = 300;
+
+/** CSS transition value for animated collapse/expand. */
+const TRANSITION_STYLE =
+  "flex-grow 0.3s cubic-bezier(0.16, 1, 0.3, 1), flex-basis 0.3s cubic-bezier(0.16, 1, 0.3, 1)";
+
 
 type ResizablePanelGroupProps = React.ComponentProps<typeof PanelGroup>;
 
@@ -31,14 +40,98 @@ function ResizablePanelGroup({
   );
 }
 
-type ResizablePanelProps = React.ComponentProps<typeof Panel>;
+type ResizablePanelProps = Omit<
+  React.ComponentProps<typeof Panel>,
+  "panelRef"
+> & {
+  /** Enable smooth CSS transition for collapse/expand. Drag resizing stays instant. @default false */
+  animated?: boolean;
+  /** Controlled collapsed state. When provided, the panel syncs to this value. */
+  collapsed?: boolean;
+};
 
 /**
  * Individual resizable panel within a ResizablePanelGroup.
  * Supports size constraints (minSize, maxSize), default sizing, and collapse behavior.
+ *
+ * Control collapse state declaratively via the `collapsed` prop.
+ * When `animated` is true, collapse/expand transitions are smooth.
+ *
+ * @example
+ * <ResizablePanel collapsed={isCollapsed} animated collapsible>
  */
-function ResizablePanel({ ...props }: ResizablePanelProps) {
-  return <Panel data-slot="resizable-panel" {...props} />;
+function ResizablePanel({
+  className,
+  animated,
+  collapsed,
+  ...props
+}: ResizablePanelProps) {
+  const panelRef = React.useRef<PanelImperativeHandle>(null);
+  const elementRef = React.useRef<HTMLDivElement>(null);
+  const animatedRef = React.useRef(animated);
+  const isFirstRender = React.useRef(true);
+
+  // Keep the ref in sync with prop changes
+  React.useEffect(() => {
+    animatedRef.current = animated;
+  }, [animated]);
+
+  /** Apply transition, call action, then remove transition after duration */
+  const withTransition = React.useCallback(
+    (action: () => void, skipAnimation = false) => {
+      const panelEl = elementRef.current?.closest(
+        '[data-panel][data-slot="resizable-panel"]',
+      ) as HTMLElement | null;
+
+      if (animatedRef.current && panelEl && !skipAnimation) {
+        panelEl.style.transition = TRANSITION_STYLE;
+        action();
+        setTimeout(() => {
+          panelEl.style.transition = "";
+        }, TRANSITION_DURATION);
+      } else {
+        action();
+      }
+    },
+    [],
+  );
+
+  // Sync collapsed prop to panel state
+  React.useEffect(() => {
+    if (collapsed === undefined) return;
+
+    // On first render, defer to allow panel registration
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      // Use requestAnimationFrame to ensure panel is registered
+      requestAnimationFrame(() => {
+        if (collapsed) {
+          panelRef.current?.collapse();
+        }
+      });
+      return;
+    }
+
+    // After first render, check current state before acting
+    const isCurrentlyCollapsed = panelRef.current?.isCollapsed() ?? false;
+    if (collapsed === isCurrentlyCollapsed) return;
+
+    if (collapsed) {
+      withTransition(() => panelRef.current?.collapse());
+    } else {
+      withTransition(() => panelRef.current?.expand());
+    }
+  }, [collapsed, withTransition]);
+
+  return (
+    <Panel
+      data-slot="resizable-panel"
+      panelRef={panelRef}
+      elementRef={elementRef}
+      className={cn(className)}
+      {...props}
+    />
+  );
 }
 
 type ResizableHandleProps = React.ComponentProps<typeof PanelResizeHandle> & {

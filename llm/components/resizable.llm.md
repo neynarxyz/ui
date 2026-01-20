@@ -70,7 +70,11 @@ All panels inherit props from react-resizable-panels Panel component.
 | maxSize | number \| string | 100 | Maximum size (number=pixels, string=percentage or CSS unit) |
 | collapsible | boolean | false | Allow panel to collapse below minSize |
 | collapsedSize | number \| string | 0 | Size when collapsed |
+| collapsed | boolean | - | Controlled collapsed state. Panel syncs to this value. |
+| animated | boolean | false | Enable smooth CSS transition for collapse/expand. Drag resizing stays instant. |
 | onResize | (size: { asPercentage: number; inPixels: number }) => void | - | Called when panel is resized |
+| onCollapse | () => void | - | Called when panel collapses |
+| onExpand | () => void | - | Called when panel expands |
 | className | string | - | Additional CSS classes |
 
 ### ResizableHandle
@@ -218,6 +222,48 @@ function MonitoredPanels() {
         <div className="p-4">Right: {sizes.right.toFixed(1)}%</div>
       </ResizablePanel>
     </ResizablePanelGroup>
+  )
+}
+```
+
+### Animated Collapse/Expand
+
+Use `collapsed` prop for declarative control and `animated` for smooth transitions. Drag resizing remains instant (no animation lag).
+
+```tsx
+import { useState } from "react"
+import {
+  ResizablePanelGroup,
+  ResizablePanel,
+  ResizableHandle,
+} from "@neynar/ui/resizable"
+import { Button } from "@neynar/ui/button"
+
+function CollapsibleSidebar() {
+  const [isCollapsed, setIsCollapsed] = useState(false)
+
+  return (
+    <div className="h-[400px]">
+      <Button onClick={() => setIsCollapsed(!isCollapsed)}>
+        {isCollapsed ? "Expand" : "Collapse"} Sidebar
+      </Button>
+      <ResizablePanelGroup orientation="horizontal">
+        <ResizablePanel
+          collapsed={isCollapsed}
+          animated
+          defaultSize="25%"
+          minSize="15%"
+          collapsible
+          collapsedSize="0%"
+        >
+          <div className="p-4">Sidebar content</div>
+        </ResizablePanel>
+        <ResizableHandle withHandle />
+        <ResizablePanel>
+          <div className="p-4">Main content</div>
+        </ResizablePanel>
+      </ResizablePanelGroup>
+    </div>
   )
 }
 ```
