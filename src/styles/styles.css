@@ -73,6 +73,10 @@
   body {
     @apply font-sans bg-background text-foreground;
   }
+  :root {
+    /* Resizable panel animation easing - override in theme or component */
+    --resizable-easing: cubic-bezier(0.16, 1, 0.3, 1);
+  }
 }
 
 /* Surface blur effect - value comes from theme's --surface-blur variable */
