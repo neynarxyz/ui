@@ -4,18 +4,47 @@ import { Progress as ProgressPrimitive } from "@base-ui/react/progress";
 
 import { cn } from "@/lib/utils";
 
-type ProgressProps = ProgressPrimitive.Root.Props;
+type ProgressProps = ProgressPrimitive.Root.Props & {
+  /**
+   * Enable smooth CSS transitions on the progress indicator.
+   * - `true` uses default 500ms duration
+   * - A number specifies custom duration in milliseconds
+   * @default false
+   */
+  smooth?: boolean | number;
+};
 
 /**
  * Root container for progress bar with label and value support.
  * Automatically includes track and indicator. Use `value={null}` for indeterminate state.
  */
-function Progress({ className, children, value, ...props }: ProgressProps) {
+function Progress({
+  className,
+  children,
+  value,
+  smooth = false,
+  style,
+  ...props
+}: ProgressProps) {
+  const isSmooth = Boolean(smooth);
+  const duration = typeof smooth === "number" ? smooth : 500;
+
   return (
     <ProgressPrimitive.Root
       value={value}
       data-slot="progress"
-      className={cn("flex flex-wrap gap-3", className)}
+      data-smooth={isSmooth || undefined}
+      className={cn(
+        "flex flex-wrap gap-3",
+        isSmooth && "**:data-[slot=progress-indicator]:duration-(--progress-duration)",
+        className,
+      )}
+      style={
+        {
+          ...(isSmooth && { "--progress-duration": `${duration}ms` }),
+          ...style,
+        } as React.CSSProperties
+      }
       {...props}
     >
       {children}

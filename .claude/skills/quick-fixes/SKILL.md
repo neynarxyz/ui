@@ -8,6 +8,7 @@ Steps to deploy a quick improvement:
 1. **Make sure you understand the issue**
 
 - If uncertain, talk to the user to understand the issue and what they want to achieve.
+- Are we on the right branch? If we've already created a PR, we should probably switch to main, pull the latest changes, and create a new branch for the fix.
 
 2. **Find a solution**
 
@@ -40,3 +41,8 @@ Steps to deploy a quick improvement:
 - Create a pull request to the main branch
 - Assign the pull request to the user
 - Give a direct link to the pull request
+
+9. **Give me a tweet about the change**
+
+- Write a tweet about the change, give me a few options so I can choose the best one for the change
+- Include the link to https://neynar.com/ui

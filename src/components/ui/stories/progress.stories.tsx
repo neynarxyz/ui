@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import {
   ActivityIcon,
@@ -25,6 +26,10 @@ const meta: Meta<typeof Progress> = {
     value: {
       control: { type: "range", min: 0, max: 100, step: 1 },
       description: "Progress value (0-100)",
+    },
+    smooth: {
+      control: "boolean",
+      description: "Enable smooth CSS transitions on value changes",
     },
     className: {
       control: "text",
@@ -435,4 +440,89 @@ export const Interactive: Story = {
       </Progress>
     </div>
   ),
+};
+
+/**
+ * Demonstrates the smooth prop for animated progress value changes.
+ * Pass `true` for default 500ms, or a number for custom duration.
+ */
+export const SmoothAnimation: Story = {
+  parameters: {
+    layout: "padded",
+  },
+  render: () => {
+    function AnimatedProgress() {
+      const [progress, setProgress] = useState(0);
+
+      useEffect(() => {
+        const interval = setInterval(() => {
+          setProgress((prev) => {
+            if (prev >= 100) return 0;
+            return prev + 10;
+          });
+        }, 1000);
+        return () => clearInterval(interval);
+      }, []);
+
+      return (
+        <div className="w-full max-w-md space-y-8">
+          <div>
+            <h3 className="text-lg font-semibold">Smooth Animation</h3>
+            <p className="text-muted-foreground text-sm">
+              Compare different transition durations.
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <p className="text-sm font-medium">
+                <code className="bg-muted rounded px-1">smooth={"{200}"}</code>{" "}
+                (fast)
+              </p>
+              <Progress value={progress} smooth={200}>
+                <ProgressTrack className="h-2">
+                  <ProgressIndicator />
+                </ProgressTrack>
+              </Progress>
+            </div>
+
+            <div className="space-y-2">
+              <p className="text-sm font-medium">
+                <code className="bg-muted rounded px-1">smooth</code> (default
+                500ms)
+              </p>
+              <Progress value={progress} smooth>
+                <ProgressTrack className="h-2">
+                  <ProgressIndicator />
+                </ProgressTrack>
+              </Progress>
+            </div>
+
+            <div className="space-y-2">
+              <p className="text-sm font-medium">
+                <code className="bg-muted rounded px-1">smooth={"{1000}"}</code>{" "}
+                (slow)
+              </p>
+              <Progress value={progress} smooth={1000}>
+                <ProgressTrack className="h-2">
+                  <ProgressIndicator />
+                </ProgressTrack>
+              </Progress>
+            </div>
+
+            <div className="space-y-2">
+              <p className="text-sm font-medium">No smooth (instant)</p>
+              <Progress value={progress}>
+                <ProgressTrack className="h-2">
+                  <ProgressIndicator />
+                </ProgressTrack>
+              </Progress>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    return <AnimatedProgress />;
+  },
 };
