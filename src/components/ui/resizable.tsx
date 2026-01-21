@@ -10,13 +10,17 @@ import {
 
 import { cn } from "@/lib/utils";
 
-/** Duration of the collapse/expand animation in milliseconds. */
-const TRANSITION_DURATION = 300;
+/** Default duration of the collapse/expand animation in milliseconds. */
+const DEFAULT_DURATION = 400;
 
-/** CSS transition value for animated collapse/expand. */
-const TRANSITION_STYLE =
-  "flex-grow 0.3s cubic-bezier(0.16, 1, 0.3, 1), flex-basis 0.3s cubic-bezier(0.16, 1, 0.3, 1)";
+/** Default easing function for collapse/expand animations. */
+const DEFAULT_EASING = "cubic-bezier(0.16, 1, 0.3, 1)";
 
+/** Generate CSS transition value for animated collapse/expand. */
+function getTransitionStyle(durationMs: number, easing: string): string {
+  const seconds = durationMs / 1000;
+  return `flex-grow ${seconds}s ${easing}, flex-basis ${seconds}s ${easing}`;
+}
 
 type ResizablePanelGroupProps = React.ComponentProps<typeof PanelGroup>;
 
@@ -48,6 +52,8 @@ type ResizablePanelProps = Omit<
   animated?: boolean;
   /** Controlled collapsed state. When provided, the panel syncs to this value. */
   collapsed?: boolean;
+  /** Animation duration in milliseconds. Only applies when `animated` is true. @default 400 */
+  duration?: number;
 };
 
 /**
@@ -64,17 +70,20 @@ function ResizablePanel({
   className,
   animated,
   collapsed,
+  duration = DEFAULT_DURATION,
   ...props
 }: ResizablePanelProps) {
   const panelRef = React.useRef<PanelImperativeHandle>(null);
   const elementRef = React.useRef<HTMLDivElement>(null);
   const animatedRef = React.useRef(animated);
+  const durationRef = React.useRef(duration);
   const isFirstRender = React.useRef(true);
 
-  // Keep the ref in sync with prop changes
+  // Keep the refs in sync with prop changes
   React.useEffect(() => {
     animatedRef.current = animated;
-  }, [animated]);
+    durationRef.current = duration;
+  }, [animated, duration]);
 
   /** Apply transition, call action, then remove transition after duration */
   const withTransition = React.useCallback(
@@ -84,11 +93,17 @@ function ResizablePanel({
       ) as HTMLElement | null;
 
       if (animatedRef.current && panelEl && !skipAnimation) {
-        panelEl.style.transition = TRANSITION_STYLE;
+        const ms = durationRef.current;
+        // Read easing from CSS variable, fallback to default
+        const easing =
+          getComputedStyle(panelEl)
+            .getPropertyValue("--resizable-easing")
+            .trim() || DEFAULT_EASING;
+        panelEl.style.transition = getTransitionStyle(ms, easing);
         action();
         setTimeout(() => {
           panelEl.style.transition = "";
-        }, TRANSITION_DURATION);
+        }, ms);
       } else {
         action();
       }
