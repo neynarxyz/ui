@@ -72,6 +72,7 @@ All panels inherit props from react-resizable-panels Panel component.
 | collapsedSize | number \| string | 0 | Size when collapsed |
 | collapsed | boolean | - | Controlled collapsed state. Panel syncs to this value. |
 | animated | boolean | false | Enable smooth CSS transition for collapse/expand. Drag resizing stays instant. |
+| duration | number | 400 | Animation duration in milliseconds. Only applies when `animated` is true. |
 | onResize | (size: { asPercentage: number; inPixels: number }) => void | - | Called when panel is resized |
 | onCollapse | () => void | - | Called when panel collapses |
 | onExpand | () => void | - | Called when panel expands |
@@ -229,6 +230,22 @@ function MonitoredPanels() {
 ### Animated Collapse/Expand
 
 Use `collapsed` prop for declarative control and `animated` for smooth transitions. Drag resizing remains instant (no animation lag).
+
+**Customization:**
+- `duration` prop controls speed (default 400ms)
+- `--resizable-easing` CSS variable controls easing curve (default `cubic-bezier(0.16, 1, 0.3, 1)`)
+
+```tsx
+// Custom duration
+<ResizablePanel animated duration={200} collapsed={isCollapsed} />
+
+// Custom easing via Tailwind arbitrary property
+<ResizablePanel
+  className="[--resizable-easing:ease-out]"
+  animated
+  collapsed={isCollapsed}
+/>
+```
 
 ```tsx
 import { useState } from "react"
