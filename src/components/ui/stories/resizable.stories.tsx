@@ -3,6 +3,8 @@ import {
   CodeIcon,
   FileIcon,
   FolderIcon,
+  PanelLeftCloseIcon,
+  PanelLeftOpenIcon,
   PlayIcon,
   TerminalIcon,
 } from "lucide-react";
@@ -164,6 +166,103 @@ export function Counter() {
     }
 
     return <CodeEditorLayout />;
+  },
+};
+
+/**
+ * Animated collapse/expand using the `collapsed` and `animated` props.
+ * Control collapse state declaratively - no ref needed.
+ * Toggle the animated prop to compare instant vs smooth transitions.
+ */
+export const AnimatedCollapse: Story = {
+  parameters: {
+    layout: "padded",
+  },
+  render: () => {
+    function AnimatedCollapseDemo() {
+      const [isCollapsed, setIsCollapsed] = useState(false);
+      const [animated, setAnimated] = useState(true);
+
+      return (
+        <div className="space-y-4">
+          <div className="flex gap-2">
+            <Button
+              onClick={() => setIsCollapsed(!isCollapsed)}
+              variant="default"
+            >
+              {isCollapsed ? (
+                <PanelLeftOpenIcon data-icon="inline-start" />
+              ) : (
+                <PanelLeftCloseIcon data-icon="inline-start" />
+              )}
+              {isCollapsed ? "Expand" : "Collapse"}
+            </Button>
+            <Button
+              onClick={() => setAnimated(!animated)}
+              variant={animated ? "secondary" : "outline"}
+            >
+              Animated: {animated ? "On" : "Off"}
+            </Button>
+          </div>
+          <div className="border-border h-[400px] w-full rounded-lg border">
+            <ResizablePanelGroup orientation="horizontal">
+              <ResizablePanel
+                collapsed={isCollapsed}
+                animated={animated}
+                defaultSize="25%"
+                minSize="15%"
+                maxSize="40%"
+                collapsible
+                collapsedSize="0%"
+              >
+                <div className="flex h-full flex-col">
+                  <div className="border-b p-3">
+                    <h3 className="flex items-center gap-2 text-sm font-semibold">
+                      <FolderIcon className="size-4" />
+                      Sidebar
+                    </h3>
+                  </div>
+                  <div className="flex-1 overflow-auto p-4">
+                    <div className="space-y-2">
+                      {["Dashboard", "Analytics", "Reports", "Settings"].map(
+                        (item) => (
+                          <div
+                            key={item}
+                            className="hover:bg-accent rounded px-2 py-1.5 text-sm transition-colors"
+                          >
+                            {item}
+                          </div>
+                        ),
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </ResizablePanel>
+              <ResizableHandle withHandle />
+              <ResizablePanel defaultSize="75%">
+                <div className="flex h-full flex-col">
+                  <div className="border-b p-3">
+                    <h3 className="text-sm font-semibold">Main Content</h3>
+                  </div>
+                  <div className="flex-1 p-4">
+                    <p className="text-muted-foreground text-sm">
+                      The sidebar uses{" "}
+                      <code className="bg-muted rounded px-1 text-xs">
+                        collapsed={"{isCollapsed}"}
+                      </code>{" "}
+                      for declarative control. Toggle the button above to
+                      compare instant vs animated transitions.
+                    </p>
+                  </div>
+                </div>
+              </ResizablePanel>
+            </ResizablePanelGroup>
+          </div>
+        </div>
+      );
+    }
+
+    return <AnimatedCollapseDemo />;
   },
 };
 

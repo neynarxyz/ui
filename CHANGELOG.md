@@ -5,6 +5,13 @@ All notable changes to `@neynar/ui` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2025-01-20
+
+### Added
+- **ResizablePanel**: Added `collapsed` prop for declarative collapse control and `animated` prop for smooth CSS transitions. Just set `collapsed={isCollapsed}` - no ref needed. Drag resizing remains instant (no animation lag).
+
+---
+
 ## [1.1.0] - 2025-01-18
 
 ### Fixed
