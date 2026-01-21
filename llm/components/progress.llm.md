@@ -45,6 +45,7 @@ Root component providing progress state context to all children.
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | value | number \| null | - | Progress value 0-100, or null for indeterminate |
+| smooth | boolean \| number | false | Enable smooth transitions. `true` = 500ms, or pass ms value |
 | min | number | 0 | Minimum value |
 | max | number | 100 | Maximum value |
 | aria-valuetext | string | - | Custom accessible label for current value |
@@ -191,6 +192,26 @@ All components share these data attributes for styling:
   <ProgressLabel>Large</ProgressLabel>
   <ProgressValue />
   <ProgressTrack className="h-3">
+    <ProgressIndicator />
+  </ProgressTrack>
+</Progress>
+```
+
+### Smooth Animation
+
+Enable smooth transitions when value changes (ideal for file uploads, real-time progress):
+
+```tsx
+// Default 500ms transition
+<Progress value={progress} smooth>
+  <ProgressTrack>
+    <ProgressIndicator />
+  </ProgressTrack>
+</Progress>
+
+// Custom 200ms transition
+<Progress value={progress} smooth={200}>
+  <ProgressTrack>
     <ProgressIndicator />
   </ProgressTrack>
 </Progress>
