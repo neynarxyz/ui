@@ -77,7 +77,7 @@ function ResizablePanel({
   const elementRef = React.useRef<HTMLDivElement>(null);
   const animatedRef = React.useRef(animated);
   const durationRef = React.useRef(duration);
-  const isFirstRender = React.useRef(true);
+  const prevCollapsedRef = React.useRef<boolean | undefined>(undefined);
 
   // Keep the refs in sync with prop changes
   React.useEffect(() => {
@@ -115,27 +115,36 @@ function ResizablePanel({
   React.useEffect(() => {
     if (collapsed === undefined) return;
 
-    // On first render, defer to allow panel registration
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      // Use requestAnimationFrame to ensure panel is registered
-      requestAnimationFrame(() => {
+    const isFirstSync = prevCollapsedRef.current === undefined;
+    const hasChanged = collapsed !== prevCollapsedRef.current;
+    prevCollapsedRef.current = collapsed;
+
+    if (!hasChanged && !isFirstSync) return;
+
+    // Helper to safely call collapse/expand with retry logic
+    const syncState = () => {
+      try {
+        const isCurrentlyCollapsed = panelRef.current?.isCollapsed() ?? false;
+        if (collapsed === isCurrentlyCollapsed) return;
+
         if (collapsed) {
-          panelRef.current?.collapse();
+          if (isFirstSync) {
+            // First sync: no animation
+            panelRef.current?.collapse();
+          } else {
+            withTransition(() => panelRef.current?.collapse());
+          }
+        } else {
+          withTransition(() => panelRef.current?.expand());
         }
-      });
-      return;
-    }
+      } catch {
+        // Panel not ready yet, retry after a tick
+        setTimeout(syncState, 0);
+      }
+    };
 
-    // After first render, check current state before acting
-    const isCurrentlyCollapsed = panelRef.current?.isCollapsed() ?? false;
-    if (collapsed === isCurrentlyCollapsed) return;
-
-    if (collapsed) {
-      withTransition(() => panelRef.current?.collapse());
-    } else {
-      withTransition(() => panelRef.current?.expand());
-    }
+    // Use setTimeout(0) to ensure we're after the panel group's layout effects
+    setTimeout(syncState, 0);
   }, [collapsed, withTransition]);
 
   return (
